@@ -9,4 +9,5 @@
 	rh = reset --hard
 	rf = !sh -c 'git reset --hard $0/$1'
 	st = status
+	gui = !sh -c '/usr/local/git/libexec/git-core/git-gui'
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
