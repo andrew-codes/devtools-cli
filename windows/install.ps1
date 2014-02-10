@@ -26,10 +26,11 @@ install-package('nuget.commandline')
 install-package('nodejs')
 install-package('nodejs.commandline')
 install-package('ruby')
-install-package('ruby.debkit')
+install-package('ruby.devkit')
 
 # IDEs
 install-package('SublimeText3')
+install-package('SublimeText3.PowershellAlias')
 install-package('VisualStudio2013Ultimate')
 install-package('VisualStudio2012Ultimate')
 install-package('resharper')
@@ -41,11 +42,13 @@ install-package('RubyMine')
 install-package('FireFox')
 install-package('GoogleChrome')
 
-# nodejs
+# Frameworks/Libraries
+
+install-package('psake')
 install-package('yeoman')
 
 
-#perform ruby updates and get gems
+# Ruby updates and some default gems; rake and bundler
 gem update --system
 gem install rake
 gem install bundler
