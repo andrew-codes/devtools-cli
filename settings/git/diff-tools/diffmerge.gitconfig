@@ -1,0 +1,1 @@
+cmd = cmd = diffmerge "$LOCAL" "$REMOTE"

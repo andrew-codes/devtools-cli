@@ -1,0 +1,25 @@
+[user]
+	name = {{ name }}
+	email = {{ email }}
+
+{{{ alias }}}
+
+[merge]
+    tool = {{ selectedMergeTool }}
+[diff]
+	tool = {{ selectedDiffTool }}
+
+{{#mergeTools}}
+[mergetool "{{ name }}"]
+	{{{ tool }}}
+{{/mergeTools}}
+
+{{#diffTools}}
+[mergetool "{{ name }}"]
+	{{{ tool }}}
+{{/diffTools}}
+
+[push]
+	default = simple
+[core]
+	excludesfile = ~/.gitignore
