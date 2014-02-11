@@ -1,6 +1,3 @@
-write-host 'Installing Chocolatey'
-iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1'))
-
 function Install-Package {
 param(
     [string] $package
