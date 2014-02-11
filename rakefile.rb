@@ -1,4 +1,5 @@
 require 'mustache'
+require 'open-uri'
 
 namespace :common do
 	desc "Enables array arguments"
@@ -46,6 +47,11 @@ namespace :windows do
 			File.open("#{Dir.home}/.gitignore", 'w') do |file|
 				file.puts Mustache.render(gitignoreTemplate, gitignoreModel)
 			end
+		end
+		desc "Configure sublime for windows"
+		task :SublimeText3 do
+			# Set SublimeText as notepad replacement
+			exec 'reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "\"%c:/Program Files/Sublime\" -z" /f'
 		end
 	end
 end
