@@ -1,6 +1,6 @@
 [user]
-	name = {{ name }}
-	email = {{ email }}
+	name = Andrew Smith
+	email = andrew@wearesoftwarecraftsmen.com
 
 [alias]
 	co = checkout
@@ -17,21 +17,19 @@
 	{{{ alias }}}
 
 [merge]
-    tool = {{ selectedMergeTool }}
+    tool = diffmerge
 [diff]
-	tool = {{ selectedDiffTool }}
+	tool = diffmerge
 
-{{#mergeTools}}
-[mergetool "{{ name }}"]
-	{{{ content }}}
-{{/mergeTools}}
+[mergetool "diffmerge"]
+	keepBackup = false
+	trustExitCode = false
+	cmd = diffmerge -merge -result="$PWD/$MERGED" "$PWD/$LOCAL" "$PWD/$BASE" "$PWD/$REMOTE"
 
-{{#diffTools}}
-[mergetool "{{ name }}"]
-	{{{ content }}}
-{{/diffTools}}
+[difftool "diffmerge"]
+	cmd = cmd = diffmerge "$LOCAL" "$REMOTE"
 
 [push]
 	default = simple
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = {{ gitignore }}
