@@ -1,0 +1,35 @@
+[user]
+	name = Andrew Smith
+	email = andrew@wearesoftwarecraftsmen.com
+
+[alias]
+	co = checkout
+	nb = checkout -b $0
+	db = !sh -c 'git stash && git checkout master && git branch -D $0'
+	nf = !sh -c 'git checkout -b feature/$0'
+	pf = !sh -c 'git pull --rebase $0 $1'
+	mt = mergetool
+	fa = fetch --all
+	rh = reset --hard
+	rf = !sh -c 'git reset --hard $0/$1'
+	st = status
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	{{{ alias }}}
+
+[merge]
+    tool = diffmerge
+[diff]
+	tool = diffmerge
+
+[mergetool "diffmerge"]
+	keepBackup = false
+	trustExitCode = false
+	cmd = diffmerge -merge -result="$PWD/$MERGED" "$PWD/$LOCAL" "$PWD/$BASE" "$PWD/$REMOTE"
+
+[difftool "diffmerge"]
+	cmd = cmd = diffmerge "$LOCAL" "$REMOTE"
+
+[push]
+	default = simple
+[core]
+	excludesfile = {{ gitignore }}

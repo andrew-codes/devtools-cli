@@ -11,6 +11,11 @@ $script = <<SCRIPT
   write-host 'Installing git'  
   write-host '.......................'
   cinst 'git'
+  write-host 'Installing ruby, sake, rake, bundler'  
+  write-host '.......................'
+  cinst 'ruby'
+  gem install rake
+  gem install bundler
   if (-not (test-path ".ssh")) {
   write-host 'Setting known_hosts'
   write-host '.......................'
@@ -22,14 +27,15 @@ $script = <<SCRIPT
   write-host '.......................'
     git clone https://github.com/jamesandrewsmith/devtools.git devtools
   }
-  cd devtools/windows
+  cd devtools
   write-host 'Updating devtools'
   write-host '.......................'
   git pull
-  . "./install-package.ps1"
-  foreach ($package in $args) {
-    install-package($package)
-  }
+  write-host 'Installing software configuration rake tasks'
+  write-host '.......................'
+  bundler install
+  $software = $args
+  invoke-expression "rake windows:configure $software"
 SCRIPT
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
