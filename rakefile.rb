@@ -48,10 +48,19 @@ namespace :windows do
 				file.puts Mustache.render(gitignoreTemplate, gitignoreModel)
 			end
 		end
+
 		desc "Configure sublime for windows"
 		task :SublimeText3 do
 			# Set SublimeText as notepad replacement
 			exec 'reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "\"%c:/Program Files/Sublime\" -z" /f'
+			# Install Package Control
+			File.open("#{Dir.home}/.config/sublime-text-3/Installed Packages/Package Control.sublime-package", 'w') do | packageInstallerFile |
+				open('https://sublime.wbond.net/Package%20Control.sublime-package', 'rb') do | remotePackageInstallerFile |
+					packageInstallerFile.write(remotePackageInstallerFile.read)
+				end
+			end
+			# Include desired packages in settings file
+			exec "cp global-software-configuration/sublime-text-3/packages.sublime-settings #{Dir.home}/.config/sublime-text-3/Packages/User/Package Control.sublime-settings"
 		end
 	end
 end

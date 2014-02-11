@@ -1,0 +1,23 @@
+{
+    "installed_packages":
+    [
+        "AutoFileName",
+        "BracketHighlighter",
+        "ExportHtml",
+        "GenerateUUID",
+        "HexViewer",
+        "PackageResourceViewer",
+        "SideBarEnhancements",
+        "SideBarGit",
+        "SublimeCodeIntel",
+        "SublimeREPL",
+        "Tag",
+        "Terminal",
+        "Solarized Color Scheme",
+        "PowerShell",
+        "Markdown Preview",
+        "MarkdownEditing"
+        "Markdown Extended",
+        "Github Flavored Markdown Preview"
+    ]
+}
