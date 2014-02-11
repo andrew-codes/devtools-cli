@@ -51,8 +51,9 @@ namespace :windows do
 
 		desc "Configure sublime for windows"
 		task :SublimeText3 do
+			puts 'Configuring sublime for windows'
 			# Set SublimeText as notepad replacement
-			exec 'reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "\"%c:/Program Files/Sublime\" -z" /f'
+			exec 'reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "C:\Program Files\Sublime Text 3\sublime_text.exe" /f'
 			# Install Package Control
 			File.open("#{Dir.home}/.config/sublime-text-3/Installed Packages/Package Control.sublime-package", 'w') do | packageInstallerFile |
 				open('https://sublime.wbond.net/Package%20Control.sublime-package', 'rb') do | remotePackageInstallerFile |
