@@ -33,6 +33,7 @@ $script = <<SCRIPT
   git pull
   write-host 'Installing software configuration rake tasks'
   write-host '.......................'
+  bundler install
   $software = $args
   invoke-expression "rake windows:configure $software"
 SCRIPT
