@@ -1,3 +1,0 @@
-keepBackup = false
-trustExitCode = false
-cmd = diffmerge -merge -result="$PWD/$MERGED" "$PWD/$LOCAL" "$PWD/$BASE" "$PWD/$REMOTE"
