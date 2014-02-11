@@ -1,6 +1,3 @@
-# Set execution policy
-set-executionpolicy Unrestricted
-
 write-host 'Installing Chocolatey'
 iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1'))
 
