@@ -31,10 +31,21 @@ namespace :windows do
 		desc "Configure git for windows"
 		task :git do
 			puts 'Configuring git for windows'
-			gitConfiguration = Hash.new
-			gitConfiguration[:alias] = ''
-			gitTemplate = File.read('global_-software-configuration/git/gitconfig.mustache')
-			puts Mustache.render(gitTemplate, gitConfiguration)
+			# gitconfig
+			gitconfigModel = Hash.new
+			gitconfigModel[:alias] = ''
+			gitconfigModel[:gitignore] = '~/.gitignore'
+			gitconfigTemplate = File.read('global-software-configuration/git/gitconfig.mustache')
+			File.open("#{Dir.home}/.gitconfig", 'w') do |file|
+				file.puts Mustache.render(gitconfigTemplate, gitconfigModel)
+			end
+	
+			#global gitignore
+			gitignoreModel = Hash.new
+			gitignoreTemplate = File.read('global-software-configuration/git/gitignore.mustache')
+			File.open("#{Dir.home}/.gitignore", 'w') do |file|
+				file.puts Mustache.render(gitignoreTemplate, gitignoreModel)
+			end
 		end
 	end
 end
