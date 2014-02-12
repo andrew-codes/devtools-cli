@@ -1,5 +1,8 @@
 require 'mustache'
 require 'open-uri'
+require 'rubygems'
+require 'git'
+require 'fileutils'
 
 namespace :common do
 	desc "Enables array arguments"
@@ -53,15 +56,18 @@ namespace :windows do
 		task :SublimeText3 do
 			puts 'Configuring sublime for windows'
 			# Set SublimeText as notepad replacement
-			exec 'reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "C:\Program Files\Sublime Text 3\sublime_text.exe" /f'
+			sh 'reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "C:\Program Files\Sublime Text 3\sublime_text.exe" /f'
 			# Install Package Control
-			File.open("#{Dir.home}/.config/sublime-text-3/Installed Packages/Package Control.sublime-package", 'w') do | packageInstallerFile |
-				open('https://sublime.wbond.net/Package%20Control.sublime-package', 'rb') do | remotePackageInstallerFile |
-					packageInstallerFile.write(remotePackageInstallerFile.read)
-				end
+			$packageInstallerDirectory = "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/Package Control"
+			if !File.exists? $packageInstallerDirectory
+				Dir.mkdir $packageInstallerDirectory
+				$packageInstallerRepo = Git.clone('git://github.com/wbond/sublime_package_control.git','', :path=> $packageInstallerDirectory)
+			else
+				$packageInstallerRepo = Git.open("#{$packageInstallerDirectory}")
+				$packageInstallerRepo.pull
 			end
+			FileUtils.cp 'global-software-configuration/sublime-text-3/packages.sublime-settings', "'#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings'"
 			# Include desired packages in settings file
-			exec "cp global-software-configuration/sublime-text-3/packages.sublime-settings #{Dir.home}/.config/sublime-text-3/Packages/User/Package Control.sublime-settings"
 		end
 	end
 end
