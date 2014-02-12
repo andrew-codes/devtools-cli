@@ -1,41 +1,26 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-$script = <<SCRIPT
-  write-host 'Setting execution Policy'
-  write-host '.......................'
-  set-executionpolicy Unrestricted -force
-  write-host 'Installing Chocolatey'
-  write-host '.......................'
-  iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1'))
-  write-host 'Installing git'  
-  write-host '.......................'
-  cinst 'git'
-  write-host 'Installing ruby, sake, rake, bundler'  
-  write-host '.......................'
-  cinst 'ruby'
-  gem install rake
-  gem install bundler
-  if (-not (test-path ".ssh")) {
-  write-host 'Setting known_hosts'
-  write-host '.......................'
-    mkdir .ssh
-    "github.com,192.30.252.131 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==" | out-file ".ssh/known_hosts"
-  }
-  if (-not (test-path -Path "devtools")) {
-  write-host 'Cloning devtools'
-  write-host '.......................'
-    git clone https://github.com/jamesandrewsmith/devtools.git devtools
-  }
+$environment = 'windows'
+$software_to_install = [
+  "7zip",
+  "nodejs",
+  "SublimeText3"
+]
+
+$software_to_configure = [
+  "git",
+  "SublimeText3"
+]
+
+$provisionScript=<<SCRIPT
+  git clone https://github.com/jamesandrewsmith/devtools.git
   cd devtools
-  write-host 'Updating devtools'
-  write-host '.......................'
   git pull
-  write-host 'Installing software configuration rake tasks'
-  write-host '.......................'
-  bundler install
-  $software = $args
-  invoke-expression "rake windows:configure $software"
+  cd '#{$environment}'
+  bundle install
+  rake provision #{$software_to_install.join(" ")}
+  rake configure #{$software_to_configure.join(" ")}
 SCRIPT
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
@@ -86,7 +71,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    config.winrm.password = "vagrant"
 
    config.vm.provision "shell" do |s|
-      s.inline = $script
-      s.args = ""
+      s.inline = $provisionScript
   end
 end
