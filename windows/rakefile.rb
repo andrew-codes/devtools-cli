@@ -18,7 +18,7 @@ end
 desc "Pre-provisioning environemnt setup"
 task :provision_setup do |t, args|
 	sh 'powershell set-executionpolicy Unrestricted -force'
-	sh "iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1'))"
+	sh "powershell iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1'))"
 end
 
 desc "Provision and install software"
