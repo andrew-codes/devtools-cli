@@ -31,7 +31,7 @@ end
 desc "Configure software"
 task :configure, [:software] => ['common:parameters'] do |t, args|	
 	ARGV.each { |software|
-		Rake::Task["windows:software:#{software}"].invoke
+		Rake::Task["software:#{software}"].invoke
 	}
 end
 
