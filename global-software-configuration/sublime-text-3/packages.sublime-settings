@@ -1,7 +1,6 @@
 {
     "installed_packages":
     [
-        "Package Installer",
         "AutoFileName",
         "BracketHighlighter",
         "ExportHtml",

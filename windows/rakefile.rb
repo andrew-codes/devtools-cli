@@ -60,7 +60,7 @@ namespace :software do
 	task :SublimeText3 do
 		puts 'Configuring sublime for windows'
 		# Set SublimeText as notepad replacement
-		sh 'powershell reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "C:\Program Files\Sublime Text 3\sublime_text.exe" /f'
+		# sh 'powershell reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "C:\Program Files\Sublime Text 3\sublime_text.exe" /f'
 		# Install Package Control
 		$packageInstallerDirectory = "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/Package Control"
 		if !File.exists? $packageInstallerDirectory
@@ -70,7 +70,7 @@ namespace :software do
 			$packageInstallerRepo = Git.open("#{$packageInstallerDirectory}")
 			$packageInstallerRepo.pull
 		end
-		FileUtils.cp '../global-software-configuration/sublime-text-3/packages.sublime-settings', "'#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings'"
+		FileUtils.cp '../global-software-configuration/sublime-text-3/packages.sublime-settings', "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings"
 		# Include desired packages in settings file
 	end
 end
