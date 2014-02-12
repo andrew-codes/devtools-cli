@@ -31,7 +31,7 @@ end
 desc "Configure software"
 task :configure, [:software] => ['common:parameters'] do |t, args|	
 	ARGV.each { |software|
-		Rake::Task["software:#{software}"].invoke
+		Rake::Task["software:#{software.gsub(/[.]/, "_")}"].invoke
 	}
 end
 
@@ -74,6 +74,13 @@ namespace :software do
 		FileUtils.cp '../global-software-configuration/sublime-text-3/packages.sublime-settings', "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings"
 		# Install settings
 		FileUtils.cp '../global-software-configuration/sublime-text-3/preferences.sublime-settings', "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings"
-		
 	end
+
+	desc "Configure nodejs for windows"
+	task :nodejs do
+		# Install nodejs global modules
+		sh 'powershell npm install gulp -g'
+		sh 'powershell npm install grunt-cli -g'
+		sh 'powershell npm install yeoman -g'
+	end	
 end
