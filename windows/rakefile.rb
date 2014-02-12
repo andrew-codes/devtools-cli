@@ -43,14 +43,14 @@ namespace :software do
 		gitconfigModel = Hash.new
 		gitconfigModel[:alias] = ''
 		gitconfigModel[:gitignore] = '~/.gitignore'
-		gitconfigTemplate = File.read('global-software-configuration/git/gitconfig.mustache')
+		gitconfigTemplate = File.read('../global-software-configuration/git/gitconfig.mustache')
 		File.open("#{Dir.home}/.gitconfig", 'w') do |file|
 			file.puts Mustache.render(gitconfigTemplate, gitconfigModel)
 		end
 
 		# global gitignore
 		gitignoreModel = Hash.new
-		gitignoreTemplate = File.read('global-software-configuration/git/gitignore.mustache')
+		gitignoreTemplate = File.read('../global-software-configuration/git/gitignore.mustache')
 		File.open("#{Dir.home}/.gitignore", 'w') do |file|
 			file.puts Mustache.render(gitignoreTemplate, gitignoreModel)
 		end
@@ -70,7 +70,7 @@ namespace :software do
 			$packageInstallerRepo = Git.open("#{$packageInstallerDirectory}")
 			$packageInstallerRepo.pull
 		end
-		FileUtils.cp 'global-software-configuration/sublime-text-3/packages.sublime-settings', "'#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings'"
+		FileUtils.cp '../global-software-configuration/sublime-text-3/packages.sublime-settings', "'#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings'"
 		# Include desired packages in settings file
 	end
 end
