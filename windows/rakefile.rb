@@ -24,7 +24,7 @@ end
 desc "Provision and install software"
 task :provision, [:software] => ['common:parameters', :provision_setup] do |t, args|	
 	ARGV.each { |software|
-		sh "cinst #{software}"
+		sh "powershell cinst #{software}"
 	}
 end
 
@@ -60,7 +60,7 @@ namespace :software do
 	task :SublimeText3 do
 		puts 'Configuring sublime for windows'
 		# Set SublimeText as notepad replacement
-		sh 'reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "C:\Program Files\Sublime Text 3\sublime_text.exe" /f'
+		sh 'powershell reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "C:\Program Files\Sublime Text 3\sublime_text.exe" /f'
 		# Install Package Control
 		$packageInstallerDirectory = "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/Package Control"
 		if !File.exists? $packageInstallerDirectory
