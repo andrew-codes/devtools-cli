@@ -70,7 +70,10 @@ namespace :software do
 			$packageInstallerRepo = Git.open("#{$packageInstallerDirectory}")
 			$packageInstallerRepo.pull
 		end
+		# Install packages
 		FileUtils.cp '../global-software-configuration/sublime-text-3/packages.sublime-settings', "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings"
-		# Include desired packages in settings file
+		# Install settings
+		FileUtils.cp '../global-software-configuration/sublime-text-3/preferences.sublime-settings', "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings"
+		
 	end
 end
