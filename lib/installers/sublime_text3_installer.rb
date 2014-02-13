@@ -8,4 +8,7 @@ class SublimeText3Installer
   def for(platform)
     @chocolately_installer.install_for(platform)
   end
+
+  private
+  @chocolately_installer
 end

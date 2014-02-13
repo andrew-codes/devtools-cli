@@ -7,7 +7,7 @@ end
 
 class SoftwareCollection
   def initialize
-    @software = self.populate_software
+    @software = populate_software
 
   end
 

@@ -8,12 +8,12 @@ class SublimeText3Configurator
   end
 
   def for(platform)
-    self.setConfiguration platform
-    self.setPath platform
-    self.associateFiles platform
-    self.packageControl platform
-    self.addPackages platform
-    self.configureSettings platform
+    setConfiguration platform
+    setPath platform
+    associateFiles platform
+    packageControl platform
+    addPackages platform
+    configureSettings platform
   end
 
   private
@@ -29,7 +29,7 @@ class SublimeText3Configurator
   end
 
   def configureSettings (platform)
-    self.createUserPackagesPath
+    createUserPackagesPath
     FileUtils.cp "#{configatron.devtools}/global-software-configuration/sublime-text-3/preferences.sublime-settings", "#{configatron.home}/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings"
   end
 
@@ -41,7 +41,7 @@ class SublimeText3Configurator
   end
 
   def addPackages (platform)
-    self.createUserPackagesPath
+    createUserPackagesPath
     FileUtils.cp "#{configatron.devtools}/global-software-configuration/sublime-text-3/packages.sublime-settings", "#{configatron.home}/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings"
   end
 

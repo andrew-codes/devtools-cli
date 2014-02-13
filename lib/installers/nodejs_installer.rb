@@ -8,4 +8,7 @@ class NodejsInstaller
   def for(platform)
     @chocolately_installer.install_for(platform)
   end
+
+  private
+  @chocolately_installer
 end

@@ -6,8 +6,8 @@ class GitConfigurator
   end
 
   def for(platform)
-    self.gitconfig
-    self.gitignore
+    gitconfig
+    gitignore
   end
 
   private
