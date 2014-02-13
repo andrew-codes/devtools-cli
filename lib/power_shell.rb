@@ -1,6 +1,6 @@
 class PowerShell
   def self.run(command)
-    system "powershell try{#{command}} catch[system.exception] {write-host $error[0]} finally{ exit }"
+    system "powershell Try{ #{command} } Catch {write-host $error[0] } Finally { exit }"
   end
 
   def self.run_cmd(command)
