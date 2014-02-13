@@ -1,0 +1,16 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    configatron (2.13.0)
+      yamler (>= 0.1.0)
+    git (1.2.6)
+    mustache (0.99.5)
+    yamler (0.1.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  configatron
+  git
+  mustache

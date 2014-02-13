@@ -7,8 +7,7 @@ end
 
 class SoftwareCollectionProvider
   def initialize
-    @software = self.populate_software
-
+    @software = populate_software
   end
 
   def self.get_all
