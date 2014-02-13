@@ -1,5 +1,6 @@
 require_relative 'unknown_software'
 require_relative 'software_collection'
+require_relative 'pre_installed_software'
 
 class ProvisionerLocator
   def initialize
