@@ -59,8 +59,19 @@ namespace :software do
 	desc "Configure sublime for windows"
 	task :SublimeText3 do
 		puts 'Configuring sublime for windows'
-		# Set SublimeText as notepad replacement
-		# sh 'powershell reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "C:\Program Files\Sublime Text 3\sublime_text.exe" /f'
+		# Set SublimeText file associations
+		$sublimePath = "'C:\\Program Files\\Sublime Text 3\\sublime_text.exe'"
+		sh 'assoc .log=logfile'
+		sh 'assoc .yml=yamlfile'
+		sh 'assoc .json=jsonfile'
+		sh 'assoc .gitconfig=gitfile'
+		sh 'assoc .gitignore=gitfile'
+		sh "ftype txtfile=#{$sublimePath}"
+		sh "ftype logfile=#{$sublimePath}"
+		sh "ftype yamlfile=#{$sublimePath}"
+		sh "ftype jsonfile=#{$sublimePath}"		
+		sh "ftype CSSfile=#{$sublimePath}"	
+		sh "ftype gitfile=#{$sublimePath}"
 		# Install Package Control
 		$packageInstallerDirectory = "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/Package Control"
 		if !File.exists? $packageInstallerDirectory
@@ -82,5 +93,5 @@ namespace :software do
 		sh 'powershell npm install gulp -g'
 		sh 'powershell npm install grunt-cli -g'
 		sh 'powershell npm install yeoman -g'
-	end	
+	end
 end
