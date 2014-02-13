@@ -5,9 +5,9 @@ Dir.glob('installers/*.rb') do |file|
   require_relative file
 end
 
-class SoftwareCollection
+class SoftwareCollectionProvider
   def initialize
-    @software = populate_software
+    @software = self.populate_software
 
   end
 

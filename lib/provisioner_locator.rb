@@ -1,5 +1,5 @@
 require_relative 'unknown_software'
-require_relative 'software_collection'
+require_relative 'software_collection_provider'
 require_relative 'pre_installed_software'
 require_relative 'power_shell'
 
@@ -7,7 +7,8 @@ class ProvisionerLocator
   def initialize
     @unknown_software = UnknownSoftware.new
     @pre_installed_software = PreInstalledSoftware.new
-    @software_collection = SoftwareCollection.get_all
+    software_collection_provider = SoftwareCollectionProvider.new
+    @software_collection = software_collection_provider.get_all
     @pre_installed_software_collection = [
         :Git,
         :Ruby
