@@ -15,6 +15,6 @@ class ChocolatelySoftwareInstaller
   end
 
   private
-  @@windows_installer
+  @@windows_installer = nil
   @software
 end
