@@ -35,7 +35,7 @@ task :provision, [:software] => ['common:parameters'] do |t, args|
   software_to_provision.each { |software|
     provisioner.install(software).for(platform)
   }
-  PowerShell.kill_all
+  puts 'Installation complete'
 end
 
 desc 'Configure software'
@@ -43,5 +43,5 @@ task :configure, [:software] => ['common:parameters'] do |t, args|
   software_to_provision.each { |software|
     provisioner.configure(software).for(platform)
   }
-  PowerShell.kill_all
+  puts 'Configuration complete'
 end
