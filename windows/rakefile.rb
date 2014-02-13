@@ -17,14 +17,14 @@ end
 
 desc "Pre-provisioning environemnt setup"
 task :provision_setup do |t, args|
-	sh 'powershell(set-executionpolicy Unrestricted -force)'
-	sh "powershell(iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1')))"
+	system 'powershell set-executionpolicy Unrestricted -force'
+	system "powershell iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1'))"
 end
 
 desc "Provision and install software"
 task :provision, [:software] => ['common:parameters', :provision_setup] do |t, args|	
 	ARGV.each { |software|
-		sh "powershell(cinst #{software})"
+		system "powershell cinst #{software}"
 	}
 end
 
@@ -61,20 +61,20 @@ namespace :software do
 		puts 'Configuring sublime for windows'
 		# Put sublime on PATH
 		$sublimePath = 'C:\\Program Files\\Sublime Text 3'
-		sh "powershell([Environment]::SetEnvironmentVariable(\"#{$sublimePath}\", $env:Path, [System.EnvironmentVariableTarget]::Machine))"
+		system "powershell [Environment]::SetEnvironmentVariable(\"#{$sublimePath}\", $env:Path, [System.EnvironmentVariableTarget]::Machine)"
 		# Set SublimeText file associations
 		$sublimeExe = "#{$sublimePath}sublime_text.exe'"
-		sh 'assoc .log=logfile'
-		sh 'assoc .yml=yamlfile'
-		sh 'assoc .json=jsonfile'
-		sh 'assoc .gitconfig=gitfile'
-		sh 'assoc .gitignore=gitfile'
-		sh "ftype txtfile=#{$sublimeExe}"
-		sh "ftype logfile=#{$sublimeExe}"
-		sh "ftype yamlfile=#{$sublimeExe}"
-		sh "ftype jsonfile=#{$sublimeExe}"		
-		sh "ftype CSSfile=#{$sublimeExe}"	
-		sh "ftype gitfile=#{$sublimeExe}"
+		system 'assoc .log=logfile'
+		system 'assoc .yml=yamlfile'
+		system 'assoc .json=jsonfile'
+		system 'assoc .gitconfig=gitfile'
+		system 'assoc .gitignore=gitfile'
+		system "ftype txtfile=#{$sublimeExe}"
+		system "ftype logfile=#{$sublimeExe}"
+		system "ftype yamlfile=#{$sublimeExe}"
+		system "ftype jsonfile=#{$sublimeExe}"		
+		system "ftype CSSfile=#{$sublimeExe}"	
+		system "ftype gitfile=#{$sublimeExe}"
 		# Install Package Control
 		$packageInstallerDirectory = "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/Package Control"
 		if !File.exists? $packageInstallerDirectory
@@ -93,8 +93,8 @@ namespace :software do
 	desc "Configure nodejs for windows"
 	task :nodejs do
 		# Install nodejs global modules
-		sh 'npm install gulp -g'
-		sh 'npm install grunt-cli -g'
-		sh 'npm install yeoman -g'
+		system' npm install gulp -g'
+		system' npm install grunt-cli -g'
+		system' npm install yeoman -g'
 	end
 end
