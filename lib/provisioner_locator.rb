@@ -44,7 +44,7 @@ class ProvisionerLocator
       }
     end
     @software_collection.each { |item|
-      if item.object_id == software.object_id
+      if item[:name] == software
         return item
       end
     }
