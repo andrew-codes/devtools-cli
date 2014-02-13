@@ -1,6 +1,6 @@
 class PowerShell
   def self.run(command)
-  `#{command}`
+  `powershell #{command} && exit`
   end
 
   def self.run_cmd(command)
