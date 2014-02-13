@@ -46,9 +46,8 @@ class SublimeText3Configurator
   def package_control (platform)
     package_control_path = "#{@packages_path}/Package Control"
     FileUtils.mkpath package_control_path
-    package_installer_repo = Git.clone('https://github.com/wbond/sublime_package_control.git ', '', :path => package_control_path)
-    package_installer_repo = Git.open(package_control_path)
-    package_installer_repo.pull
+    system "git clone https://github.com/wbond/sublime_package_control.git #{package_control_path}"
+    system "cd #{package_control_path} && git pull"
   end
 
   def associate_files (platform)
