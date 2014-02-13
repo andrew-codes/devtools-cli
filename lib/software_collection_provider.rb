@@ -10,7 +10,7 @@ class SoftwareCollectionProvider
     @software = populate_software
   end
 
-  def self.get_all
+  def get_all
     @software
   end
 
