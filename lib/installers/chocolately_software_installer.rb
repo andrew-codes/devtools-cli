@@ -1,20 +1,18 @@
 require_relative '../chocolatey'
 
 class ChocolatelySoftwareInstaller
-  def initialize(software)
-    @software = software
+  def initialize()
     if @@windows_installer.nil?
       @@windows_installer = Chocolatey.new
     end
   end
 
-  def install_for(platform)
+  def install_for(software, platform)
     if platform == :windows
-      @@windows_installer.install(@software)
+      @@windows_installer.install(software)
     end
   end
 
   private
   @@windows_installer = nil
-  @software
 end

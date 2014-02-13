@@ -8,19 +8,19 @@ class SublimeText3Configurator
   end
 
   def for(platform)
-    setConfiguration platform
-    setPath platform
-    associateFiles platform
-    packageControl platform
-    addPackages platform
-    configureSettings platform
+    set_configuration platform
+    set_path platform
+    associate_files platform
+    package_control platform
+    add_packages platform
+    configure_settings platform
   end
 
   private
-  def setConfiguration(platform)
+  def set_configuration(platform)
     if platform == :windows
-      @packagesPath = "#{configatron.home}/AppData/Roaming/Sublime Text 3/Packages"
-      @fileAssociations = {
+      @packages_path = "#{configatron.home}/AppData/Roaming/Sublime Text 3/Packages"
+      @file_associations = {
           '.log' => 'logfile',
           '.yml' => 'yamlfile',
           '.json' => 'jsfile',
@@ -28,48 +28,46 @@ class SublimeText3Configurator
     end
   end
 
-  def configureSettings (platform)
-    createUserPackagesPath
+  def configure_settings (platform)
+    create_user_packages_path
     FileUtils.cp "#{configatron.devtools}/global-software-configuration/sublime-text-3/preferences.sublime-settings", "#{configatron.home}/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings"
   end
 
-  def createUserPackagesPath
-    userPackagesPath = "#{@packagesPath/User}"
-    if !File.exists? userPackagesPath
-      FileUtils.mkpath userPackagesPath
-    end
+  def create_user_packages_path
+    user_packages_path = "#{@packages_path}/User"
+    FileUtils.mkpath user_packages_path
   end
 
-  def addPackages (platform)
-    createUserPackagesPath
+  def add_packages (platform)
+    create_user_packages_path
     FileUtils.cp "#{configatron.devtools}/global-software-configuration/sublime-text-3/packages.sublime-settings", "#{configatron.home}/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings"
   end
 
-  def packageControl (platform)
-    if !File.exists? @packagesPath
-      FileUtils.mkpath @packagesPath
+  def package_control (platform)
+    if !File.exists? @packages_path
+      FileUtils.mkpath @packages_path
     end
-    packageControlPath = "#{@packagesPath}/Package Control"
-    packageInstallerRepo = Git.clone(' git : // github.com/wbond/sublime_package_control.git ', '', :path => packageControlPath)
-    packageInstallerRepo = Git.open(packageControlPath)
-    packageInstallerRepo.pull
+    package_control_path = "#{@packages_path}/Package Control"
+    package_installer_repo = Git.clone(' git : // github.com/wbond/sublime_package_control.git ', '', :path => package_control_path)
+    package_installer_repo = Git.open(package_control_path)
+    package_installer_repo.pull
   end
 
-  def associateFiles (platform)
-    sublimeExePath = "'#{sublimePath}\\sublime_text.exe'"
-    @fileAssociations.each_pair do |key, value|
+  def associate_files (platform)
+    sublime_exe_path = "'#{@sublime_path}\\sublime_text.exe'"
+    @file_associations.each_pair { |key, value|
       PowerShell.run_cmd "assoc #{key}=#{value}"
-      PowerShell.run_cmd "ftype #{value}=#{sublimeExe}"
-    end
-    PowerShell.run_cmd "ftype txtfile=#{sublimeExe}"
+      PowerShell.run_cmd "ftype #{value}=#{sublime_exe_path}"
+    }
+    PowerShell.run_cmd "ftype txtfile=#{sublime_exe_path}"
   end
 
-  def setPath(platform)
-    sublimePath = 'C:\\Program Files\\Sublime Text 3'
-    setPathCommand = "powershell [Environment]::SetEnvironmentVariable(\"#{sublimePath}\", $env:Path, [System.EnvironmentVariableTarget]::Machine)"
-    PowerShell.run(setPathCommand)
+  def set_path(platform)
+    @sublime_path = 'C:\\Program Files\\Sublime Text 3'
+    set_path_command = "powershell [Environment]::SetEnvironmentVariable(\"#{sublimePath}\", $env:Path, [System.EnvironmentVariableTarget]::Machine)"
+    PowerShell.run(set_path_command)
   end
 
-  @fileAssociations
-  @packagesPath
+  @file_associations
+  @packages_path
 end
