@@ -4,6 +4,6 @@ class PowerShell
   end
 
   def self.run_cmd(command)
-    system "cmd.exe #{command}"
+    self.run("cmd.exe #{command}" )
   end
 end
