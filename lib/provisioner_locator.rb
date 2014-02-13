@@ -24,9 +24,9 @@ class ProvisionerLocator
   end
 
   def pre_install(platform)
-        if platform == :windows
-          PowerShell.run 'set-executionpolicy Unrestricted -force'
-        end
+    if platform == :windows
+      PowerShell.run 'set-executionpolicy Unrestricted -force'
+    end
   end
 
   private
@@ -36,16 +36,22 @@ class ProvisionerLocator
   @pre_installed_software
 
   def get_for(software)
-     if @pre_installed_software_collection.include? software
-       @pre_installed_software.set_software software
-       @pre_installed_software
-     end
+    if @pre_installed_software_collection.include? software
+      @pre_installed_software.set_software software
+      return {
+          installer: @pre_installed_software,
+          configurator: @pre_installed_software
+      }
+    end
     @software_collection.each { |item|
       if item == software
         return item
       end
     }
     @unknown_software.set_software software
-    @unknown_software
+    return {
+        installer: @unknown_software,
+        configurator: @unknown_software
+    }
   end
 end
