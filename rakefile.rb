@@ -10,6 +10,7 @@ configatron.home = Dir.home
 configatron.devtools = "#{Dir.home}/devtools"
 platform = :windows
 software_to_provision = []
+provisioner = ProvisionerLocator.new
 
 namespace :common do
   desc 'Enables array arguments'
@@ -32,15 +33,15 @@ end
 
 desc 'Provision and install software'
 task :provision, [:software] => ['common:parameters'] do |t, args|
-  ProvisionerLocator.pre_install(platform)
+ provisioner.pre_install(platform)
   software_to_provision.each { |software|
-    ProvisionerLocator.install(software).for(platform)
+    provisioner.install(software).for(platform)
   }
 end
 
 desc 'Configure software'
 task :configure, [:software] => ['common:parameters'] do |t, args|
   software_to_provision.each { |software|
-    ProvisionerLocator.configure(software).for(platform)
+    provisioner.configure(software).for(platform)
   }
 end
