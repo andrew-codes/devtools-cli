@@ -13,7 +13,7 @@ namespace :common do
     		task "software:#{arg}".to_sym do ; end
   		end
 	end
-end
+end 
 
 desc "Pre-provisioning environemnt setup"
 task :provision_setup do |t, args|
