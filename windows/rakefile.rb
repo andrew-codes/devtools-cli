@@ -61,20 +61,20 @@ namespace :software do
 		puts 'Configuring sublime for windows'
 		# Put sublime on PATH
 		$sublimePath = 'C:\\Program Files\\Sublime Text 3'
-		system "powershell [Environment]::SetEnvironmentVariable(\"#{$sublimePath}\", $env:Path, [System.EnvironmentVariableTarget]::Machine)"
+		system %Q"powershell [Environment]::SetEnvironmentVariable("#{$sublimePath}", $env:Path, [System.EnvironmentVariableTarget]::Machine)"
 		# Set SublimeText file associations
-		$sublimeExe = "#{$sublimePath}sublime_text.exe'"
+		$sublimeExe = "#{$sublimePath}\\sublime_text.exe'"
 		system 'assoc .log=logfile'
 		system 'assoc .yml=yamlfile'
 		system 'assoc .json=jsonfile'
 		system 'assoc .gitconfig=gitfile'
 		system 'assoc .gitignore=gitfile'
-		system "ftype txtfile=#{$sublimeExe}"
-		system "ftype logfile=#{$sublimeExe}"
-		system "ftype yamlfile=#{$sublimeExe}"
-		system "ftype jsonfile=#{$sublimeExe}"		
-		system "ftype CSSfile=#{$sublimeExe}"	
-		system "ftype gitfile=#{$sublimeExe}"
+		system "ftype txtfile='#{$sublimeExe}'"
+		system "ftype logfile='#{$sublimeExe}'"
+		system "ftype yamlfile='#{$sublimeExe}'"
+		system "ftype jsonfile='#{$sublimeExe}'"		
+		system "ftype CSSfile='#{$sublimeExe}'"	
+		system "ftype gitfile='#{$sublimeExe}'"
 		# Install Package Control
 		$packageInstallerDirectory = "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/Package Control"
 		if !File.exists? $packageInstallerDirectory
