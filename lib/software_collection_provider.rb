@@ -39,7 +39,9 @@ class SoftwareCollectionProvider
         :VisualStudio2012,
         :VisualStudio2013,
         :WebStorm,
-        :RubyMine
+        :RubyMine,
+        :MySql,
+        :RavenDb
     ]
   end
 end
