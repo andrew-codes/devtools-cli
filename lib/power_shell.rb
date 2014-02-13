@@ -1,10 +1,9 @@
 class PowerShell
   def self.run(command)
-                command.gsub(/.*[']*.*/, "\\'")
-    system "powershell -Command 'Try{ #{command} } Catch {write-host $error[0] }'"
+    system "powershell -Command \"& {Try{ #{command} } Catch {write-host $error[0] }}\""
   end
 
   def self.run_cmd(command)
-    self.run("cmd.exe #{command}" )
+    self.run("cmd.exe #{command}")
   end
 end
