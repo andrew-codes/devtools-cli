@@ -44,10 +44,8 @@ class SublimeText3Configurator
   end
 
   def package_control (platform)
-    if !File.exists? @packages_path
-      FileUtils.mkpath @packages_path
-    end
     package_control_path = "#{@packages_path}/Package Control"
+    FileUtils.mkpath package_control_path
     package_installer_repo = Git.clone(' git : // github.com/wbond/sublime_package_control.git ', '', :path => package_control_path)
     package_installer_repo = Git.open(package_control_path)
     package_installer_repo.pull
