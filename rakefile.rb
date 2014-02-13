@@ -35,9 +35,7 @@ task :provision, [:software] => ['common:parameters'] do |t, args|
   software_to_provision.each { |software|
     provisioner.install(software).for(platform)
   }
-  PowerShell.pids.each { |pid|
-    Process.kill 'INT', pid
-  }
+  PowerShell.kill_all
 end
 
 desc 'Configure software'
@@ -45,7 +43,5 @@ task :configure, [:software] => ['common:parameters'] do |t, args|
   software_to_provision.each { |software|
     provisioner.configure(software).for(platform)
   }
-  PowerShell.pids.each { |pid|
-    Process.kill 'INT', pid
-  }
+  PowerShell.kill_all
 end
