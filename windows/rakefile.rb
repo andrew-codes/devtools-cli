@@ -17,14 +17,16 @@ end
 
 desc "Pre-provisioning environemnt setup"
 task :provision_setup do |t, args|
-	sh 'powershell set-executionpolicy Unrestricted -force'
-	sh "powershell iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1'))"
+	sh 'set-executionpolicy Unrestricted -force'
+	sh "iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1'))"
+	sh '$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")'
 end
 
 desc "Provision and install software"
 task :provision, [:software] => ['common:parameters', :provision_setup] do |t, args|	
 	ARGV.each { |software|
-		sh "powershell cinst #{software}"
+		sh "cinst #{software}"
+		sh '$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")'
 	}
 end
 
@@ -93,8 +95,8 @@ namespace :software do
 	desc "Configure nodejs for windows"
 	task :nodejs do
 		# Install nodejs global modules
-		sh 'powershell npm install gulp -g'
-		sh 'powershell npm install grunt-cli -g'
-		sh 'powershell npm install yeoman -g'
+		sh 'npm install gulp -g'
+		sh 'npm install grunt-cli -g'
+		sh 'npm install yeoman -g'
 	end
 end
