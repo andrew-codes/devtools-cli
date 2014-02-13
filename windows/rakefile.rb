@@ -61,7 +61,7 @@ namespace :software do
 		puts 'Configuring sublime for windows'
 		# Put sublime on PATH
 		$sublimePath = 'C:\\Program Files\\Sublime Text 3'
-		system %Q|powershell [Environment]::SetEnvironmentVariable("#{$sublimePath}", $env:Path, [System.EnvironmentVariableTarget]::Machine)|
+		system %Q|powershell [Environment]::SetEnvironmentVariable(""#{$sublimePath}"", $env:Path, [System.EnvironmentVariableTarget]::Machine)|
 		# Set SublimeText file associations
 		$sublimeExe = "#{$sublimePath}\\sublime_text.exe'"
 		system 'assoc .log=logfile'
@@ -76,17 +76,19 @@ namespace :software do
 		system "ftype CSSfile='#{$sublimeExe}'"	
 		system "ftype gitfile='#{$sublimeExe}'"
 		# Install Package Control
-		$packageInstallerDirectory = "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/Package Control"
+		$packageInstallerDirectory = "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages"
 		if !File.exists? $packageInstallerDirectory
 			FileUtils.mkpath $packageInstallerDirectory
-			$packageInstallerRepo = Git.clone('git://github.com/wbond/sublime_package_control.git','', :path=> $packageInstallerDirectory)
+			$packageInstallerRepo = Git.clone('git://github.com/wbond/sublime_package_control.git','Package Control', :path=> $packageInstallerDirectory)
 		else
 			$packageInstallerRepo = Git.open("#{$packageInstallerDirectory}")
 			$packageInstallerRepo.pull
 		end
-		# Install packages
+		# Install packages & settings
+		if !File.exists? "#{$packageInstallerDirectory}/User"
+			FileUtils.mkpath "#{$packageInstallerDirectory}/User"
+		end
 		FileUtils.cp '../global-software-configuration/sublime-text-3/packages.sublime-settings', "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings"
-		# Install settings
 		FileUtils.cp '../global-software-configuration/sublime-text-3/preferences.sublime-settings', "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings"
 	end
 
