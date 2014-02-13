@@ -19,7 +19,7 @@ class SoftwareCollectionProvider
 
   def populate_software
     software_collection = []
-    software = get_software_list
+    software = get_supported_software
     software.each { |software_name|
       software_collection.push({
                                    :name => software_name,
@@ -30,7 +30,7 @@ class SoftwareCollectionProvider
     software_collection
   end
 
-  def get_software_list
+  def get_supported_software
     [
         :Git,
         :Nodejs,

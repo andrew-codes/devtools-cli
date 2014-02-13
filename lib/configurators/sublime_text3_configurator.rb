@@ -64,8 +64,8 @@ class SublimeText3Configurator
 
   def set_path(platform)
     @sublime_path = 'C:\\Program Files\\Sublime Text 3'
-    set_path_command = "setx PATH '$env.path;#{@sublime_path}' /m"
-    PowerShell.run(set_path_command)
+    #set_path_command = "setx PATH '$env.path;#{@sublime_path}' /m"
+    #PowerShell.run(set_path_command)
   end
 
   @file_associations
