@@ -2,14 +2,13 @@
 # vi: set ft=ruby :
 
 platform = :windows
-software_to_install = %w(Zip Nodejs SublimeText3)
+software_to_install = %w(Zip Git Nodejs SublimeText3)
 
 software_to_configure = %w(Git Nodejs SublimeText3)
 
 provisionScript=<<SCRIPT
   git clone https://github.com/jamesandrewsmith/devtools.git
   cd devtools
-  git checkout feature/rake
   git pull
   bundle install
   rake provision #{platform} #{software_to_install.join(" ")}
