@@ -1,8 +1,8 @@
-Dir.glob('configurators/*.rb').each { |file|
-  require_relative file
-}
-Dir.glob('installers/*.rb').each { |file|
-  require_relative file
+Dir[
+    "#{File.dirname(__FILE__)}/configurators/*.rb",
+    "#{File.dirname(__FILE__)}/installers/*.rb"
+].each { |file|
+  require file
 }
 
 class SoftwareCollectionProvider
