@@ -39,8 +39,8 @@ class ProvisionerLocator
     if @pre_installed_software_collection.include? software
       @pre_installed_software.set_software software
       return {
-          installer: @pre_installed_software,
-          configurator: @pre_installed_software
+          :installer => @pre_installed_software,
+          :configurator => @pre_installed_software
       }
     end
     @software_collection.each { |item|
@@ -50,8 +50,8 @@ class ProvisionerLocator
     }
     @unknown_software.set_software software
     return {
-        installer: @unknown_software,
-        configurator: @unknown_software
+        :installer => @unknown_software,
+        :configurator => @unknown_software
     }
   end
 end
