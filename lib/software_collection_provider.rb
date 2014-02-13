@@ -23,8 +23,8 @@ class SoftwareCollectionProvider
     software.each { |software_name|
       software_collection.push({
                                    software_name => {
-                                       :installer => "#{software_name}Installer".constantize.new,
-                                       :configurator => "#{software_name}Configurator".constantize.new
+                                       :installer => "#{software_name}Installer".const_get.new,
+                                       :configurator => "#{software_name}Configurator".const_get.new
                                    }
                                })
     }
