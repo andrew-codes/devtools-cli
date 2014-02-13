@@ -5,7 +5,7 @@ class GitConfigurator
     @gitConfigPath = "#{configatron.devtools}/global-software-configuration/git"
   end
 
-  def configure_for(platform)
+  def for(platform)
     self.gitconfig
     self.gitignore
   end

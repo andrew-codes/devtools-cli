@@ -5,7 +5,7 @@ class GitInstaller
     @chocolately_installer = ChocolatelySoftwareInstaller.new 'git'
   end
 
-  def install_for(platform)
+  def for(platform)
     @chocolately_installer.install_for(platform)
   end
 end

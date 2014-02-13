@@ -7,7 +7,7 @@ class SublimeText3Configurator
 
   end
 
-  def configure_for(platform)
+  def for(platform)
     self.setConfiguration platform
     self.setPath platform
     self.associateFiles platform

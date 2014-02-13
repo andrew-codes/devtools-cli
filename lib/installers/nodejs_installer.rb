@@ -5,7 +5,7 @@ class NodejsInstaller
     @chocolately_installer = ChocolatelySoftwareInstaller.new 'nodejs'
   end
 
-  def install_for(platform)
+  def for(platform)
     @chocolately_installer.install_for(platform)
   end
 end

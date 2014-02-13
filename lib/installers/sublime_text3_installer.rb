@@ -5,7 +5,7 @@ class SublimeText3Installer
     @chocolately_installer = ChocolatelySoftwareInstaller.new 'SublimeText3'
   end
 
-  def install_for(platform)
+  def for(platform)
     @chocolately_installer.install_for(platform)
   end
 end
