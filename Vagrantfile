@@ -14,6 +14,7 @@ provisionScript=<<SCRIPT
   bundle install
   rake provision #{platform} #{software_to_install.join(" ")}
   rake configure #{platform} #{software_to_configure.join(" ")}
+  exit 0
 SCRIPT
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
