@@ -1,26 +1,26 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-$environment = 'windows'
-$software_to_install = [
+platform = :windows
+software_to_install = [
   "7zip",
   "nodejs",
   "SublimeText3"
 ]
 
-$software_to_configure = [
+software_to_configure = [
   "git",
   "SublimeText3"
 ]
 
-$provisionScript=<<SCRIPT
+provisionScript=<<SCRIPT
   git clone https://github.com/jamesandrewsmith/devtools.git
   cd devtools
+  git checkout feature/rake
   git pull
-  cd '#{$environment}'
   bundle install
-  rake provision #{$software_to_install.join(" ")}
-  rake configure #{$software_to_configure.join(" ")}
+  rake provision #{platform} #{software_to_install.join(" ")}
+  rake configure #{platform} #{software_to_configure.join(" ")}
 SCRIPT
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
@@ -33,7 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "windows8"
-  config.vm.guest = :windows
+  config.vm.guest = platform
   # config.vm.box_url = "http://domain.com/path/to/above.box"
 
   # Create a private network, which allows host-only access to the machine
@@ -71,6 +71,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
    config.winrm.password = "vagrant"
 
    config.vm.provision "shell" do |s|
-      s.inline = $provisionScript
+      s.inline = provisionScript
   end
 end
