@@ -19,7 +19,7 @@ class SoftwareCollectionProvider
 
   def populate_software
     software_collection = []
-    software = self.get_software_list
+    software = get_software_list
     software.each { |software_name|
       software_collection.push({
                                    software_name => {
