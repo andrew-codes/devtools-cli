@@ -17,16 +17,14 @@ end
 
 desc "Pre-provisioning environemnt setup"
 task :provision_setup do |t, args|
-	sh 'set-executionpolicy Unrestricted -force'
-	sh "iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1'))"
-	sh '$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")'
+	sh 'powershell(set-executionpolicy Unrestricted -force)'
+	sh "powershell(iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1')))"
 end
 
 desc "Provision and install software"
 task :provision, [:software] => ['common:parameters', :provision_setup] do |t, args|	
 	ARGV.each { |software|
-		sh "cinst #{software}"
-		sh '$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")'
+		sh "powershell(cinst #{software})"
 	}
 end
 
@@ -63,7 +61,7 @@ namespace :software do
 		puts 'Configuring sublime for windows'
 		# Put sublime on PATH
 		$sublimePath = 'C:\\Program Files\\Sublime Text 3'
-		sh "[Environment]::SetEnvironmentVariable(\"#{$sublimePath}\", $env:Path, [System.EnvironmentVariableTarget]::Machine)"
+		sh "powershell([Environment]::SetEnvironmentVariable(\"#{$sublimePath}\", $env:Path, [System.EnvironmentVariableTarget]::Machine))"
 		# Set SublimeText file associations
 		$sublimeExe = "#{$sublimePath}sublime_text.exe'"
 		sh 'assoc .log=logfile'
