@@ -1,4 +1,4 @@
-require '../power_shell'
+require_relative '../power_shell'
 
 class NodejsConfigurator
   def for(platform)
