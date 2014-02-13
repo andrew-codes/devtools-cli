@@ -10,7 +10,7 @@ class SublimeText3Configurator
   def for(platform)
     set_configuration platform
     set_path platform
-    #associate_files platform
+    associate_files platform
     package_control platform
     add_packages platform
     configure_settings platform
