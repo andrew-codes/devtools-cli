@@ -59,19 +59,22 @@ namespace :software do
 	desc "Configure sublime for windows"
 	task :SublimeText3 do
 		puts 'Configuring sublime for windows'
+		# Put sublime on PATH
+		$sublimePath = 'C:\\Program Files\\Sublime Text 3'
+		sh "setx \"$env.path;#{$sublimePath}\" -m"
 		# Set SublimeText file associations
-		$sublimePath = "'C:\\Program Files\\Sublime Text 3\\sublime_text.exe'"
+		$sublimeExe = "#{$sublimePath}sublime_text.exe'"
 		sh 'assoc .log=logfile'
 		sh 'assoc .yml=yamlfile'
 		sh 'assoc .json=jsonfile'
 		sh 'assoc .gitconfig=gitfile'
 		sh 'assoc .gitignore=gitfile'
-		sh "ftype txtfile=#{$sublimePath}"
-		sh "ftype logfile=#{$sublimePath}"
-		sh "ftype yamlfile=#{$sublimePath}"
-		sh "ftype jsonfile=#{$sublimePath}"		
-		sh "ftype CSSfile=#{$sublimePath}"	
-		sh "ftype gitfile=#{$sublimePath}"
+		sh "ftype txtfile=#{$sublimeExe}"
+		sh "ftype logfile=#{$sublimeExe}"
+		sh "ftype yamlfile=#{$sublimeExe}"
+		sh "ftype jsonfile=#{$sublimeExe}"		
+		sh "ftype CSSfile=#{$sublimeExe}"	
+		sh "ftype gitfile=#{$sublimeExe}"
 		# Install Package Control
 		$packageInstallerDirectory = "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/Package Control"
 		if !File.exists? $packageInstallerDirectory
