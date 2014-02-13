@@ -1,13 +1,13 @@
 require_relative 'chocolately_software_installer'
 
-class GitInstaller
+class VisualStudio2012Installer
   def initialize
     @chocolately_installer = ChocolatelySoftwareInstaller.new
   end
 
   def for(platform)
-    @chocolately_installer.install_for('git', platform)
-    @chocolately_installer.install_for('poshgit', platform)
+    @chocolately_installer.install_for('VisualStudio2013Ultimate', platform)
+    @chocolately_installer.install_for('ReSharper', platform)
   end
 
   private

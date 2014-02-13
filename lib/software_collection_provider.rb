@@ -35,7 +35,11 @@ class SoftwareCollectionProvider
         :Git,
         :Nodejs,
         :SublimeText3,
-        :Zip
+        :Zip,
+        :VisualStudio2012,
+        :VisualStudio2013,
+        :WebStorm,
+        :RubyMine
     ]
   end
 end
