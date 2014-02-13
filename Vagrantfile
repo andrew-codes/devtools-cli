@@ -17,7 +17,7 @@ provisionScript=<<SCRIPT
 SCRIPT
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
-VAGRANTFILE_API_VERSION = "2"
+VAGRANTFILE_API_VERSION = '2'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
@@ -25,7 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "windows8"
+  config.vm.box = 'windows8'
   config.vm.guest = platform
   # config.vm.box_url = "http://domain.com/path/to/above.box"
 
@@ -53,17 +53,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   config.vm.provider :vmware do |v|
      v.gui = true
-     v.vmx["memsize"] = "8192"
-     v.vmx["numvcpus"] = "2"
+     v.vmx['memsize'] = '8192'
+     v.vmx['numvcpus'] = '2'
    end
    config.vm.network :forwarded_port, guest: 3389, host: 3389
    config.vm.network :forwarded_port, guest: 80, host: 8080
-   config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
+   config.vm.network :forwarded_port, guest: 5985, host: 5985, id: 'winrm', auto_correct: true
    config.windows.halt_timeout = 30
-   config.winrm.username = "vagrant"
-   config.winrm.password = "vagrant"
+   config.winrm.username = 'vagrant'
+   config.winrm.password = 'vagrant'
 
-   config.vm.provision "shell" do |s|
+   config.vm.provision 'shell' do |s|
       s.inline = provisionScript
   end
 end
