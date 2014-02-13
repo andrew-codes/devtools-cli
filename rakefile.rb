@@ -24,9 +24,6 @@ namespace :common do
       task item do
         ;
       end
-      task "software:#{arg}".to_sym do
-        ;
-      end
     end
   end
 end
