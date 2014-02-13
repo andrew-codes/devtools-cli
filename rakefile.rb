@@ -5,6 +5,7 @@ require 'git'
 require 'fileutils'
 require 'configatron'
 require_relative 'lib/provisioner_locator'
+require_relative 'lib/power_shell'
 
 configatron.home = Dir.home
 configatron.devtools = "#{Dir.home}/devtools"
@@ -33,6 +34,9 @@ task :provision, [:software] => ['common:parameters'] do |t, args|
  provisioner.pre_install(platform)
   software_to_provision.each { |software|
     provisioner.install(software).for(platform)
+  }
+  PowerShell.pids.each{|pid|
+    Process.kill 'INT', pid
   }
 end
 

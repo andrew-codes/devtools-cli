@@ -1,6 +1,7 @@
 class PowerShell
+  @@pids = []
   def self.run(command)
-    Process.spawn "PowerShell", "exec \"powershell #{command}\""
+    @@pids.push(Process.spawn "powershell #{command}")
   end
 
   def self.run_cmd(command)
