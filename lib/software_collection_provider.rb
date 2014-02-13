@@ -1,10 +1,9 @@
-Dir.glob('configurators/*.rb') do |file|
+Dir.glob('configurators/*.rb').each { |file|
   require_relative file
-end
-Dir.glob('installers/*.rb') do |file|
+}
+Dir.glob('installers/*.rb').each { |file|
   require_relative file
-end
-require_relative 'installers/git_installer'
+}
 
 class SoftwareCollectionProvider
   def initialize

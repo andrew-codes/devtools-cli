@@ -1,4 +1,4 @@
-require_relative '../powershell'
+require_relative 'power_shell'
 
 class Chocolatey
   @@not_installed = true
