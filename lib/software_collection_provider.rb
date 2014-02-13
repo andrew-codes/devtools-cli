@@ -34,7 +34,8 @@ class SoftwareCollectionProvider
     [
         :Git,
         :Nodejs,
-        :SublimeText3
+        :SublimeText3,
+        :Zip
     ]
   end
 end
