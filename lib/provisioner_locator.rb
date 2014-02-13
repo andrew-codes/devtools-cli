@@ -14,11 +14,11 @@ class ProvisionerLocator
     ]
   end
 
-  def get_installer_for(software)
+  def install(software)
     self.get_for(software).installer
   end
 
-  def get_configurator_for(software)
+  def configure(software)
     self.get_for(software).configurator
   end
 
