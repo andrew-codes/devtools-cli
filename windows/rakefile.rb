@@ -61,7 +61,7 @@ namespace :software do
 		puts 'Configuring sublime for windows'
 		# Put sublime on PATH
 		$sublimePath = 'C:\\Program Files\\Sublime Text 3'
-		system %Q"powershell [Environment]::SetEnvironmentVariable("#{$sublimePath}", $env:Path, [System.EnvironmentVariableTarget]::Machine)"
+		system %Q|powershell [Environment]::SetEnvironmentVariable("#{$sublimePath}", $env:Path, [System.EnvironmentVariableTarget]::Machine)|
 		# Set SublimeText file associations
 		$sublimeExe = "#{$sublimePath}\\sublime_text.exe'"
 		system 'assoc .log=logfile'
@@ -78,7 +78,7 @@ namespace :software do
 		# Install Package Control
 		$packageInstallerDirectory = "#{Dir.home}/AppData/Roaming/Sublime Text 3/Packages/Package Control"
 		if !File.exists? $packageInstallerDirectory
-			Dir.mkdir $packageInstallerDirectory
+			FileUtils.mkpath $packageInstallerDirectory
 			$packageInstallerRepo = Git.clone('git://github.com/wbond/sublime_package_control.git','', :path=> $packageInstallerDirectory)
 		else
 			$packageInstallerRepo = Git.open("#{$packageInstallerDirectory}")
