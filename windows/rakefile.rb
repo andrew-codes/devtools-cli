@@ -63,7 +63,7 @@ namespace :software do
 		puts 'Configuring sublime for windows'
 		# Put sublime on PATH
 		$sublimePath = 'C:\\Program Files\\Sublime Text 3'
-		sh "setx \"$env.path;#{$sublimePath}\" -m"
+		sh "[Environment]::SetEnvironmentVariable(\"#{$sublimePath}\", $env:Path, [System.EnvironmentVariableTarget]::Machine)"
 		# Set SublimeText file associations
 		$sublimeExe = "#{$sublimePath}sublime_text.exe'"
 		sh 'assoc .log=logfile'
