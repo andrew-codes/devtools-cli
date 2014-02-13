@@ -2,16 +2,9 @@
 # vi: set ft=ruby :
 
 platform = :windows
-software_to_install = [
-  "7zip",
-  "nodejs",
-  "SublimeText3"
-]
+software_to_install = %w(7zip Nodejs SublimeText3)
 
-software_to_configure = [
-  "git",
-  "SublimeText3"
-]
+software_to_configure = %w(Git Nodejs SublimeText3)
 
 provisionScript=<<SCRIPT
   git clone https://github.com/jamesandrewsmith/devtools.git

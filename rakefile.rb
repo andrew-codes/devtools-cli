@@ -4,7 +4,7 @@ require 'rubygems'
 require 'git'
 require 'fileutils'
 require 'configatron'
-require 'lib/provisioner_locator'
+require_relative 'lib/provisioner_locator'
 
 configatron.home = Dir.home
 configatron.devtools = "#{Dir.home}/devtools"
