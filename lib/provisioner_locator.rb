@@ -14,14 +14,6 @@ class ProvisionerLocator
     @software_library.get_configurator_for(software)
   end
 
-  def prepare_install(platform)
-    if platform == :windows
-      PowerShell.run 'set-executionpolicy Unrestricted -force'
-      PowerShell.run "iex ((new-object net.webclient).DownloadString('http://psget.net/GetPsGet.ps1'))"
-      PowerShell.run 'Install-Module pscx'
-    end
-  end
-
   private
   @software_library
 end

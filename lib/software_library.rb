@@ -43,15 +43,24 @@ class SoftwareLibrary
       if pre_installed_software.include? software
         @software_installers[software] = PreInstalledSoftware.new software
       else
-        @software_installers[software] = Object.const_get("#{software}Installer").new
+        begin
+          @software_installers[software] = Object.const_get("#{software}Installer").new
+        rescue
+          @software_installers[software] = UnknownSoftware.new(software)
+        end
       end
-      @software_configurators[software] = Object.const_get("#{software}Configurator").new
+      begin
+        @software_configurators[software] = Object.const_get("#{software}Configurator").new
+      rescue
+        @software_configurators[software] = UnknownSoftware.new(software)
+      end
     }
 
   end
 
   def get_pre_installed_software
     [
+        :Git,
         :Ruby
     ]
   end
