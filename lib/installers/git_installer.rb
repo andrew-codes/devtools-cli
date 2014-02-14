@@ -4,8 +4,8 @@ require_relative '../environment_path'
 class GitInstaller
   def for(platform)
     ChocolatelySoftwareInstaller.new('git').for(platform)
+    setup_posh_git platform
     ChocolatelySoftwareInstaller.new('poshgit').for(platform)
-    self.setup_posh_git platform
   end
 
   private
