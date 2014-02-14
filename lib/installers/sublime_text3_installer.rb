@@ -1,12 +1,12 @@
-require_relative 'chocolately_software_installer'
+require_relative '../chocolatey'
 
 class SublimeText3Installer
   def initialize
-    @chocolately_installer = ChocolatelySoftwareInstaller.new
+    @chocolately_installer = Chocolatey.new
   end
 
   def for(platform)
-    @chocolately_installer.install_for('SublimeText3', platform)
+    @chocolately_installer.install('SublimeText3').for(platform)
   end
 
   private

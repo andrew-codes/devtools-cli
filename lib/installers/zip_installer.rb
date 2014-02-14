@@ -1,12 +1,12 @@
-require_relative 'chocolately_software_installer'
+require_relative '../chocolatey'
 
 class ZipInstaller
   def initialize
-    @chocolately_installer = ChocolatelySoftwareInstaller.new
+    @chocolately_installer = Chocolatey.new
   end
 
   def for(platform)
-    @chocolately_installer.install_for('7zip', platform)
+    @chocolately_installer.install('7zip').for(platform)
   end
 
   private

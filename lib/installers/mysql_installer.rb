@@ -1,13 +1,13 @@
-require_relative 'chocolately_software_installer'
+require_relative '../chocolatey'
 
 class MySqlInstaller
   def initialize
-    @chocolately_installer = ChocolatelySoftwareInstaller.new
+    @chocolately_installer = Chocolatey.new
   end
 
   def for(platform)
-    @chocolately_installer.install_for('mysql', platform)
-    @chocolately_installer.install_for('mysql.workbench', platform)
+    @chocolately_installer.install('mysql').for(platform)
+    @chocolately_installer.isntall('mysql.workbench').for(platform)
   end
 
   private

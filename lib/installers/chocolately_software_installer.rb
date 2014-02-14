@@ -1,18 +1,20 @@
 require_relative '../chocolatey'
 
 class ChocolatelySoftwareInstaller
-  def initialize()
-    if @@windows_installer.nil?
-      @@windows_installer = Chocolatey.new
+  def initialize(software)
+    if @@not_installed
+      PowerShell.run("iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1'))")
     end
+    @software = software
   end
 
-  def install_for(software, platform)
+  def for(platform)
     if platform == :windows
-      @@windows_installer.install(software)
+      PowerShell.run("cinst #{@software}")
     end
   end
 
   private
-  @@windows_installer = nil
+  @software
+  @@not_installed = true
 end

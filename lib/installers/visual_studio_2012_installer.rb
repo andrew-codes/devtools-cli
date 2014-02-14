@@ -1,15 +1,15 @@
-require_relative 'chocolately_software_installer'
+require_relative '../chocolatey'
 
 class VisualStudio2012Installer
   def initialize
-    @chocolately_installer = ChocolatelySoftwareInstaller.new
+    @chocolately_installer = Chocolatey.new
   end
 
   def for(platform)
-    @chocolately_installer.install_for('VisualStudio2012Ultimate', platform)
-    @chocolately_installer.install_for('Dogtail.VS2012.3', platform)
-    @chocolately_installer.install_for('ReSharper', platform)
-    @chocolately_installer.install_for('dotPeek', platform)
+    @chocolately_installer.install('VisualStudio2012Ultimate').for(platform)
+    @chocolately_installer.install('Dogtail.VS2012.3').for(platform)
+    @chocolately_installer.install('ReSharper').for(platform)
+    @chocolately_installer.install('dotPeek').for(platform)
   end
 
   private

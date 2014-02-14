@@ -1,4 +1,5 @@
 require_relative 'power_shell'
+require_relative 'installers/chocolately_software_installer'
 
 class Chocolatey
   @@not_installed = true
@@ -11,6 +12,6 @@ class Chocolatey
   end
 
   def install(software)
-    PowerShell.run("cinst #{software}")
+    ChocolateySoftwareInstaller.new software
   end
 end

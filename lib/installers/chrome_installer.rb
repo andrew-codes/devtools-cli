@@ -1,12 +1,12 @@
-require_relative 'chocolately_software_installer'
+require_relative '../chocolatey'
 
 class ChromeInstaller
   def initialize
-    @chocolately_installer = ChocolatelySoftwareInstaller.new
+    @chocolately_installer =  Chocolatey.new
   end
 
   def for(platform)
-    @chocolately_installer.install_for('GoogleChrome', platform)
+    @chocolately_installer.install('GoogleChrome').for(platform)
   end
 
   private

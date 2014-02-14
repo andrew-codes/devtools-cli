@@ -1,13 +1,13 @@
-require_relative 'chocolately_software_installer'
+require_relative '../chocolatey'
 
 class NodejsInstaller
   def initialize
-    @chocolately_installer = ChocolatelySoftwareInstaller.new
+    @chocolately_installer = Chocolatey.new
   end
 
   def for(platform)
-    @chocolately_installer.install_for('nodejs', platform)
-    @chocolately_installer.install_for('nodejs.commandline', platform)
+    @chocolately_installer.install('nodejs').for(platform)
+    @chocolately_installer.install('nodejs.commandline').for(platform)
   end
 
   private
