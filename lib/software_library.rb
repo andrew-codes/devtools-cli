@@ -38,17 +38,28 @@ class SoftwareLibrary
 
   def populate_library
     software_collection = get_supported_software
+    pre_installed_software = get_preinstalled_software
     software_collection.each { |software|
-      @software_installers[software] = nil
-      @software_installers[software] = Object.const_get("#{software}Installer").new
+      if pre_installed_software.includes? software
+        @software_installers[software] = PreInstalledSoftware.new software
+      else
+        @software_installers[software] = Object.const_get("#{software}Installer").new
+      end
       @software_configurators[software] = Object.const_get("#{software}Configurator").new
     }
-    @software_installers[:Ruby] = PreInstalledSoftware.new :Ruby
+
+  end
+
+  def pre_installed_software
+    [
+        :Ruby
+    ]
   end
 
   def get_supported_software
     [
         :Git,
+        :Ruby,
         :Nodejs,
         :SublimeText3,
         :Zip,
