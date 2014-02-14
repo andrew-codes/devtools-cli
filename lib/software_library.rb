@@ -70,7 +70,8 @@ class SoftwareLibrary
         :MySql,
         :RavenDb,
         :Chrome,
-        :Firefox
+        :Firefox,
+        :DiffMerge
     ]
   end
 end
