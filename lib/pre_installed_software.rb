@@ -1,10 +1,10 @@
 class PreInstalledSoftware
-  def for(platform)
-    puts "Software #{@software} is pre-installed for #{platform}"
+  def initialize(software)
+    @software = software
   end
 
-  def set_software(software)
-    @software = software
+  def for(platform)
+    puts "Software #{@software} is pre-installed for #{platform}"
   end
 
   private

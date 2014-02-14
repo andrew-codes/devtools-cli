@@ -1,14 +1,7 @@
-require_relative '../chocolatey'
+require_relative 'chocolately_software_installer'
 
 class RubyMineInstaller
-  def initialize
-    @chocolately_installer = Chocolatey.new
-  end
-
   def for(platform)
-    @chocolately_installer.install('RubyMine').for(platform)
+    ChocolatelySoftwareInstaller.new('RubyMine').for(platform)
   end
-
-  private
-  @chocolately_installer
 end

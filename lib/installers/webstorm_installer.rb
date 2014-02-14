@@ -1,14 +1,7 @@
-require_relative '../chocolatey'
+require_relative 'chocolately_software_installer'
 
 class WebStormInstaller
-  def initialize
-    @chocolately_installer = Chocolatey.new
+   def for(platform)
+    ChocolatelySoftwareInstaller.new('WebStorm').for(platform)
   end
-
-  def for(platform)
-    @chocolately_installer.install('WebStorm').for(platform)
-  end
-
-  private
-  @chocolately_installer
 end

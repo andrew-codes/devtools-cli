@@ -1,14 +1,7 @@
-require_relative '../chocolatey'
+require_relative 'chocolately_software_installer'
 
 class FirefoxInstaller
-  def initialize
-    @chocolately_installer = Chocolatey.new
-  end
-
   def for(platform)
-    @chocolately_installer.install('Firefox').for(platform)
+    ChocolatelySoftwareInstaller.new('Firefox').for(platform)
   end
-
-  private
-  @chocolately_installer
 end

@@ -1,10 +1,10 @@
 class UnknownSoftware
-  def for(platform)
-    puts "Software #{@software} is not supported for #{platform}"
+  def initialize(software)
+    @software = software
   end
 
-  def set_software(software)
-    @software = software
+  def for(platform)
+    puts "Software #{@software} is not supported for #{platform}"
   end
 
   private

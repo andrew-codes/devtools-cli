@@ -1,14 +1,7 @@
-require_relative '../chocolatey'
+require_relative 'chocolately_software_installer'
 
 class RavenDbInstaller
-  def initialize
-    @chocolately_installer = Chocolatey.new
-  end
-
   def for(platform)
-    @chocolately_installer.install('ravendb').for(platform)
+    ChocolatelySoftwareInstaller.new('ravendb').for(platform)
   end
-
-  private
-  @chocolately_installer
 end

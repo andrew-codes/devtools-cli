@@ -1,15 +1,8 @@
-require_relative '../chocolatey'
+require_relative 'chocolately_software_installer'
 
 class GitInstaller
-  def initialize
-    @chocolately_installer = Chocolatey.new
-  end
-
   def for(platform)
-    @chocolately_installer.install('git').for(platform)
-    @chocolately_installer.isntall('poshgit').for(platform)
+    ChocolatelySoftwareInstaller.new('git').for(platform)
+    ChocolatelySoftwareInstaller.new('poshgit').for(platform)
   end
-
-  private
-  @chocolately_installer
 end
