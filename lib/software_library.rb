@@ -40,7 +40,7 @@ class SoftwareLibrary
     software_collection = get_supported_software
     pre_installed_software = get_pre_installed_software
     software_collection.each { |software|
-      if pre_installed_software.includes? software
+      if pre_installed_software.include? software
         @software_installers[software] = PreInstalledSoftware.new software
       else
         @software_installers[software] = Object.const_get("#{software}Installer").new
