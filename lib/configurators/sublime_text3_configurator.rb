@@ -9,6 +9,7 @@ class SublimeText3Configurator
   end
 
   def for(platform)
+    @environment = EnvironmentPath.new platform
     set_configuration platform
     set_path platform
     associate_files platform
@@ -60,7 +61,7 @@ class SublimeText3Configurator
 
   def set_path(platform)
     @sublime_path = 'C:\\Program Files\\Sublime Text 3'
-    EnvironmentPath.append @sublime_path
+    @environment.append @sublime_path
   end
 
   @file_associations

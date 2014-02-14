@@ -10,8 +10,9 @@ class GitInstaller
 
   private
   def setup_posh_git (platform)
+    environment = EnvironmentPath.new(platform)
     if platform == :windows
-        EnvironmentPath.append 'C:\\Program Files (x86)\\git\\bin'
+      EnvironmentPath.append 'C:\\Program Files (x86)\\git\\bin'
     end
   end
 end
