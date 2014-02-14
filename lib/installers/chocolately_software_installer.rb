@@ -9,6 +9,7 @@ class ChocolatelySoftwareInstaller
     if platform == :windows
       if @@not_installed
         PowerShell.run("iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1'))")
+        @@not_installed = false
       end
       PowerShell.run("cinst #{@software}")
     end
