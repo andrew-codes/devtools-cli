@@ -38,7 +38,7 @@ class SoftwareLibrary
 
   def populate_library
     software_collection = get_supported_software
-    pre_installed_software = get_preinstalled_software
+    pre_installed_software = get_pre_installed_software
     software_collection.each { |software|
       if pre_installed_software.includes? software
         @software_installers[software] = PreInstalledSoftware.new software
@@ -50,7 +50,7 @@ class SoftwareLibrary
 
   end
 
-  def pre_installed_software
+  def get_pre_installed_software
     [
         :Ruby
     ]
