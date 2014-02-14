@@ -3,7 +3,7 @@ require_relative 'power_shell'
 
 class ProvisionerLocator
   def initialize
-    @software_library = SoftwareCollection.new
+    @software_library = SoftwareLibrary.new
     if platform == :windows
       PowerShell.run 'set-executionpolicy Unrestricted -force'
     end
