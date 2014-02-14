@@ -4,9 +4,6 @@ require_relative 'power_shell'
 class ProvisionerLocator
   def initialize
     @software_library = SoftwareLibrary.new
-    if platform == :windows
-      PowerShell.run 'set-executionpolicy Unrestricted -force'
-    end
   end
 
   def install(software)
@@ -15,6 +12,12 @@ class ProvisionerLocator
 
   def configure(software)
     @software_library.get_configurator_for(software)
+  end
+
+  def prepare_install(platform)
+    if platform == :windows
+      PowerShell.run 'set-executionpolicy Unrestricted -force'
+    end
   end
 
   private

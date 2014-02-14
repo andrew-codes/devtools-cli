@@ -31,6 +31,7 @@ end
 
 desc 'Provision and install software'
 task :provision, [:software] => ['common:parameters'] do |t, args|
+  provisioner.prepare_install(platform)
   software_to_provision.each { |software|
     provisioner.install(software).for(platform)
   }
