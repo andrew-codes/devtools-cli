@@ -1,7 +1,7 @@
 require 'configatron'
 require_relative '../power_shell'
 require 'git'
-require '../environment_path'
+require_relative '../environment_path'
 
 class SublimeText3Configurator
   def initialize
