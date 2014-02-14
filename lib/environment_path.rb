@@ -4,7 +4,7 @@ class EnvironmentPath
   end
 
   def append(path)
-    if platform == :windows
+    if @platform == :windows
       PowerShell.run("Add-PathVariable #{path}")
     end
   end
