@@ -1,6 +1,4 @@
 class PowerShell
-  @@pids = []
-
   def self.run(command)
     system "powershell.exe #{command} && exit"
   end

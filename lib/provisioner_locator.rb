@@ -17,6 +17,8 @@ class ProvisionerLocator
   def prepare_install(platform)
     if platform == :windows
       PowerShell.run 'set-executionpolicy Unrestricted -force'
+      PowerShell.run '(new-object Net.WebClient).DownloadString("http://psget.net/GetPsGet.ps1") | iex'
+      PowerShell.run 'Install-Module pscx'
     end
   end
 
