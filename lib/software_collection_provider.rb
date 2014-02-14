@@ -41,7 +41,9 @@ class SoftwareCollectionProvider
         :WebStorm,
         :RubyMine,
         :MySql,
-        :RavenDb
+        :RavenDb,
+        :Chrome,
+        :Firefox
     ]
   end
 end

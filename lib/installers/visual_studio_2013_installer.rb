@@ -8,6 +8,7 @@ class VisualStudio2012Installer
   def for(platform)
     @chocolately_installer.install_for('VisualStudio2013Ultimate', platform)
     @chocolately_installer.install_for('ReSharper', platform)
+    @chocolately_installer.install_for('dotPeek', platform)
   end
 
   private
