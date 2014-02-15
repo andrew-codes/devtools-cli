@@ -43,7 +43,11 @@ class Chrome < Software
     if platform == :windows
       package_control = "#{@packages_path}/Package Control"
       FileUtils.mkpath package_control
-      repo = Git.clone('https://github.com/wbond/sublime_package_control.git', '', :path => package_control)
+      if Dir.exists? package_control
+        repo = Git.open package_control
+      else
+        repo = Git.clone('https://github.com/wbond/sublime_package_control.git', '', :path => package_control)
+      end
       repo.pull
       user_packages_path = "#{@packages_path}/User"
       FileUtils.mkpath user_packages_path
