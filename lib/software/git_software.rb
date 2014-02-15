@@ -2,7 +2,7 @@ require_relative '../software'
 require_relative 'diffmerge'
 require_relative 'posh_git'
 
-class Git < Software
+class GitSoftware < Software
   def name
     :git
   end

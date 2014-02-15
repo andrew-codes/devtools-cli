@@ -1,13 +1,13 @@
 require 'rspec'
-require_relative '../lib/software/git'
+require_relative '../lib/software/git_software'
 
-describe Git do
+describe GitSoftware do
   it 'should be pre-installed' do
-    sut = Git.new nil
+    sut = GitSoftware.new nil
     sut.is_pre_installed?.should == true
   end
   it 'should be named git' do
-    sut = Git.new nil
+    sut = GitSoftware.new nil
     sut.name.should == :git
   end
 end
