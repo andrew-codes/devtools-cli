@@ -2,7 +2,9 @@ require_relative 'software_installer'
 require_relative 'utilities/shell'
 
 class Software
-  @shell = Shell.new
+  def initialize(shell)
+    @shell = shell
+  end
 
   class << self
     attr_reader :list
@@ -10,6 +12,6 @@ class Software
   @list = []
 
   def self.inherited(klass)
-    @list << SoftwareInstaller.new(klass.new)
+    @list << SoftwareInstaller.new(klass.new(Shell.new))
   end
 end
