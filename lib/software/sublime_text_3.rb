@@ -32,6 +32,7 @@ class Chrome < Software
           '.scss' => 'CSSfile',
           '.less' => 'CSSfile'
       }
+      @file_types =%w(logfile yamlfile JSFile CSSfile txtfile)
     end
     set_environment_path platform
     set_file_associations platform
@@ -66,9 +67,10 @@ class Chrome < Software
         sublime_exe_path = "'#{@sublime_path}\\sublime_text.exe'"
         @file_associations.each_pair { |key, value|
           @shell.run "cmd /c assoc #{key}=#{value}", platform
-          @shell.run "cmd /c ftype #{value}='#{sublime_exe_path}'", platform
         }
-        @shell.run "cmd /c ftype txtfile='#{sublime_exe_path}'", platform
+        @file_types.each { |file_type|
+          @shell.run "cmd /c ftype #{file_type}='#{sublime_exe_path}'", platform
+        }
       end
     end
   end
