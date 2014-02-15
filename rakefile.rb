@@ -4,20 +4,27 @@ require 'rubygems'
 require 'git'
 require 'fileutils'
 require 'configatron'
-require_relative 'lib/provisioner_locator'
-require_relative 'lib/power_shell'
+require_relative 'lib/software_library'
+require_relative 'lib/software'
+Dir['lib/software/*.rb'].each { |file|
+  require_relative file
+}
 
 configatron.home = Dir.home
-configatron.devtools = "#{Dir.home}/devtools"
+configatron.devtools = 'c:/devtools'
 platform = :windows
 software_to_provision = []
-provisioner = ProvisionerLocator.new
+supported_software = Software.list
+software_library = SoftwareLibrary.new supported_software
 
 namespace :common do
   desc 'Enables array arguments'
   task :parameters, :parameters do |t, args|
     ARGV.shift
     platform = ARGV[0].to_sym
+    task platform do
+      ;
+    end
     ARGV.shift
     ARGV.each do |arg|
       item = arg.to_sym
@@ -32,15 +39,6 @@ end
 desc 'Provision and install software'
 task :provision, [:software] => ['common:parameters'] do |t, args|
   software_to_provision.each { |software|
-    provisioner.install(software).for(platform)
+      software_library.get(software).install_for(platform)
   }
-  puts 'Installation complete'
-end
-
-desc 'Configure software'
-task :configure, [:software] => ['common:parameters'] do |t, args|
-  software_to_provision.each { |software|
-    provisioner.configure(software).for(platform)
-  }
-  puts 'Configuration complete'
 end

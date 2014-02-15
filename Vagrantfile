@@ -1,20 +1,36 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+### Configuration ###
 platform = :windows
-software_to_install = %w(Zip Git Nodejs SublimeText3)
+box = 'windows8pro'
+software = %w(7zip git nodejs sublimetext3)
+number_of_cores = '2'
+memory_size = '8192'
+#####################
 
-software_to_configure = %w(Git Nodejs SublimeText3)
-
-provisionScript=<<SCRIPT
+provision_script=<<SCRIPT
   git clone https://github.com/jamesandrewsmith/devtools.git
   cd devtools
   git pull
-  bundle install
-  rake provision #{platform} #{software_to_install.join(" ")}
-  rake configure #{platform} #{software_to_configure.join(" ")}
+  gem install bundler
+  bundle install --without test
+  rake provision #{platform} #{software.join(" ")}
   exit 0
 SCRIPT
+
+if platform == :windows
+  setup_script = <<SCRIPT
+  iex ((new-object net.webclient).DownloadString('http://chocolatey.org/install.ps1'))
+  cinst 'git'
+  cinst 'ruby'
+  cinst 'pscx'
+SCRIPT
+else
+   setup_script = <<SCRIPT
+
+SCRIPT
+end
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = '2'
@@ -25,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = 'windows8'
+  config.vm.box = box
   config.vm.guest = platform
   # config.vm.box_url = "http://domain.com/path/to/above.box"
 
@@ -50,20 +66,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
-  
-  config.vm.provider :vmware do |v|
-     v.gui = true
-     v.vmx['memsize'] = '8192'
-     v.vmx['numvcpus'] = '2'
-   end
-   config.vm.network :forwarded_port, guest: 3389, host: 3389
-   config.vm.network :forwarded_port, guest: 80, host: 8080
-   config.vm.network :forwarded_port, guest: 5985, host: 5985, id: 'winrm', auto_correct: true
-   config.windows.halt_timeout = 30
-   config.winrm.username = 'vagrant'
-   config.winrm.password = 'vagrant'
 
-   config.vm.provision 'shell' do |s|
-      s.inline = provisionScript
+  config.vm.provider :vmware do |v|
+    v.gui = true
+    v.vmx['memsize'] = memory_size
+    v.vmx['numvcpus'] = number_of_cores
+  end
+  config.vm.network :forwarded_port, guest: 3389, host: 3389
+  config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 5985, host: 5985, id: 'winrm', auto_correct: true
+  config.windows.halt_timeout = 30
+  config.winrm.username = 'dev'
+  config.winrm.password = 'dev'
+  config.vm.provision 'shell' do |s|
+    s.inline = setup_script
+  end
+  config.vm.provision 'shell' do |s|
+    s.inline = provision_script
   end
 end
