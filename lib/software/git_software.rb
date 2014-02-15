@@ -36,6 +36,7 @@ class GitSoftware < Software
   end
 
   def add_to_path(platform)
+    puts 'Adding git to path'
     if platform == :windows
       @shell.run "Add-PathVariable 'C:\\Program Files (x86)\\Git\\bin'", platform
     end

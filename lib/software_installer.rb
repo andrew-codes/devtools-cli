@@ -25,7 +25,7 @@ class SoftwareInstaller
     end
     puts "Begin configuration of #{@software.name} on #{platform}"
     @software.configure_for(platform)
-    puts "Finish configuration of #@software.name} on #{platform}"
+    puts "Finish configuration of #{@software.name} on #{platform}"
 
   end
 
