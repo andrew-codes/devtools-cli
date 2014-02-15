@@ -3,7 +3,7 @@
 
 ### Configuration ###
 platform = :windows
-box = 'windows8'
+box = 'windows8pro'
 software = %w(7zip git nodejs sublimetext3)
 memory_size = '8192'
 #####################
@@ -12,8 +12,9 @@ provision_script=<<SCRIPT
   git clone https://github.com/jamesandrewsmith/devtools.git
   cd devtools
   git pull
-  bundle install
-  rake provision #{platform} #{software.join(" ")} --without-test
+  gem install bundler
+  bundle install --without test
+  rake provision #{platform} #{software.join(" ")}
   exit 0
 SCRIPT
 
