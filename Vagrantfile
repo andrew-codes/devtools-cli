@@ -5,6 +5,7 @@
 platform = :windows
 box = 'windows8pro'
 software = %w(7zip git nodejs sublimetext3)
+number_of_cores = '2'
 memory_size = '8192'
 #####################
 
@@ -69,7 +70,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :vmware do |v|
     v.gui = true
     v.vmx['memsize'] = memory_size
-    v.vmx['numvcpus'] = '2'
+    v.vmx['numvcpus'] = number_of_cores
   end
   config.vm.network :forwarded_port, guest: 3389, host: 3389
   config.vm.network :forwarded_port, guest: 80, host: 8080
