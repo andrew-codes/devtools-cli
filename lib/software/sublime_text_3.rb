@@ -20,7 +20,7 @@ class Chrome < Software
 
   def configure_for(platform)
     if platform == :windows
-      @sublime_path = 'C:\\Program Files\\Sublime'
+      @sublime_path = 'C:\Program Files\Sublime'
       @packages_path = "#{configatron.home}/AppData/Roaming/Sublime Text 3/Packages"
       @file_associations = {
           '.log' => 'logfile',
