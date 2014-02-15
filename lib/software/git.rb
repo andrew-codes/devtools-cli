@@ -1,4 +1,7 @@
 require_relative '../software'
+require_relative 'diffmerge'
+require_relative 'posh_git'
+
 class Git < Software
   def name
     :git
@@ -18,14 +21,18 @@ class Git < Software
     add_to_path platform
     gitconfig platform
     gitignore platform
-    windows_specific platform
+    additional_tools platform
   end
 
   private
-  def windows_specific(platform)
-    if platform == :windows
-      @shell.run("cinst 'poshgit'")
-    end
+
+  def additional_tools(platform)
+    diff_merge = DiffMerge.new @shell
+    diff_merge.install_for platform
+    diff_merge.configure_for platform
+    posh_git = PoshGit.new @shell
+    posh_git.install_for platform
+    posh_git.configure_for platform
   end
 
   def add_to_path(platform)
@@ -42,7 +49,7 @@ class Git < Software
     end
     gitconfig_model[:alias] = git_alias
     gitconfig_model[:gitignore] = "#{configatron.home}/.gitignore"
-    gitconfig_template = File.read("#{@gitConfigPath}/gitconfig.mustache")
+    gitconfig_template = File.read("#{configatron.devtools}/settings/global/git/gitconfig.mustache")
     gitconfig_contents = Mustache.render(gitconfig_template, gitconfig_model)
     File.open("#{configatron.home}/.gitconfig", 'w') do |file|
       file.puts gitconfig_contents
@@ -51,7 +58,7 @@ class Git < Software
 
   def gitignore(platform)
     gitignore_model = Hash.new
-    gitignore_template = File.read("#{@gitConfigPath}/gitignore.mustache")
+    gitignore_template = File.read("#{configatron.devtools}/settings/global/git/gitignore.mustache")
     File.open("#{configatron.home}/.gitignore", 'w') do |file|
       file.puts Mustache.render(gitignore_template, gitignore_model)
     end

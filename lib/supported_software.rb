@@ -1,5 +1,5 @@
 require_relative 'software_installer'
-require_relative 'shell'
+require_relative 'utilities/shell'
 
 class SupportedSoftware
   def self.get_all
