@@ -1,5 +1,5 @@
 require_relative '../software'
-require 'git_software'
+require_relative 'git_software'
 
 class Chrome < Software
   def name
