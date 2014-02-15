@@ -20,9 +20,9 @@ class VisualStudio2013Ultimate < Software
   end
 
   private
-  @visual_studio_exe = 'C:\Program Files (x86)\Microsoft Visual Studio 13.0\Common7\IDE\devenv.exe'
+  @visual_studio_exe = 'C:\Program Files (x86)\Microsoft Visual Studio 12.0\Common7\IDE\devenv.exe'
 
   def import_settings(settings_file)
-    @shell.run "'#{@visual_studio_exe}' /Command 'Tools.ImportandExportSettings /import:\"#{configatron.devtools}/settings/windows/visual-studio-2013/#{settings_file}\"'", :windows
+    @shell.run %Q|'#{@visual_studio_exe}' /Command 'Tools.ImportandExportSettings /import:"#{configatron.devtools}/settings/windows/visual-studio-2013/#{settings_file}"'|, :windows
   end
 end

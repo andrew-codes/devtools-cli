@@ -24,6 +24,6 @@ class VisualStudio2012Ultimate < Software
   @visual_studio_exe = 'C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\devenv.exe'
 
   def import_settings(settings_file)
-    @shell.run "'#{@visual_studio_exe}' /Command 'Tools.ImportandExportSettings /import:\"#{configatron.devtools}/settings/windows/visual-studio-2012/#{settings_file}\"'", :windows
+    @shell.run %Q|'#{@visual_studio_exe}' /Command 'Tools.ImportandExportSettings /import:"#{configatron.devtools}/settings/windows/visual-studio-2012/#{settings_file}"'|, :windows
   end
 end
