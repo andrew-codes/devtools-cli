@@ -11,7 +11,6 @@ class RavenDb < Software
       nuget = Nuget.new @shell
       nuget.install_for :windows
       @shell.run 'nuget install RavenDB.Server', platform
-      @shell.run 'nuget install RavenDB.Client', platform
     end
   end
 
