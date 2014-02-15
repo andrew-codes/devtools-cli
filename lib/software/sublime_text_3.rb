@@ -57,7 +57,7 @@ class Chrome < Software
         sublime_exe_path = "'#{@sublime_path}\\sublime_text.exe'"
         @file_associations.each_pair { |key, value|
           @shell.run "cmd /c assoc #{key}=#{value}", platform
-          @shell.run "cmd /c ftype #{value}=#{sublime_exe_path}", platform
+          @shell.run "cmd /c ftype #{value}='#{sublime_exe_path}'", platform
         }
         @shell.run "cmd /c ftype txtfile=#{sublime_exe_path}", platform
       end
