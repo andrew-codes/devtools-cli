@@ -9,6 +9,7 @@ class Nodejs < Software
     if platform == :windows
       @shell.run 'cinst nodejs.install', platform
     end
+    @shell.run '$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine")'
     @shell.run 'npm install grunt-cli -g', platform
     @shell.run 'npm install gulp -g', platform
     @shell.run 'npm install yeoman -g', platform
