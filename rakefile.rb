@@ -32,6 +32,6 @@ end
 desc 'Provision and install software'
 task :provision, [:software] => ['common:parameters'] do |t, args|
   software_to_provision.each { |software|
-
+      software_library.get(software).install_for(platform)
   }
 end

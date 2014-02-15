@@ -1,5 +1,6 @@
 require 'rspec'
 require_relative '../lib/software_library'
+require_relative '../lib/unknown_software'
 
 describe SoftwareLibrary do
   context 'when getting a software installer' do
@@ -25,7 +26,8 @@ describe SoftwareLibrary do
       git.should_receive(:is_a_match).with(:nodejs)
       sublime_text.should_receive(:is_a_match).with(:nodejs)
       sut = SoftwareLibrary.new [ruby, git, sublime_text]
-      lambda { sut.get(:nodejs) }.should raise_error
+      actual = sut.get :nodejs
+      actual.instance_of?(UnknownSoftware).should == true
     end
   end
 end

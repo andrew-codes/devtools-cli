@@ -1,3 +1,4 @@
+require_relative 'unknown_software'
 
 class SoftwareLibrary
   def initialize(software_collection)
@@ -10,7 +11,7 @@ class SoftwareLibrary
         return software_installer
       end
     }
-    throw "#{software} not found in supported software"
+    UnknownSoftware.new software
   end
 
   private

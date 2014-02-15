@@ -1,5 +1,9 @@
+require_relative 'software_installer'
+require_relative 'shell'
+
 class SupportedSoftware
   def self.get_all
+    shell = Shell.new
     software = []
     before = ObjectSpace.each_object(Class).to_a
     Dir['software/*.rb'].each { |file|
@@ -7,7 +11,7 @@ class SupportedSoftware
     }
     after = ObjectSpace.each_object(Class).to_a
     (after-before).map { |klass|
-      software.push klass.new
+      software.push SoftwareInstaller.new(klass.new(shell))
     }
     software
   end

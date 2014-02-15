@@ -13,7 +13,7 @@ provision_script=<<SCRIPT
   cd devtools
   git pull
   bundle install
-  rake provision #{platform} #{software.join(" ")}
+  rake provision #{platform} #{software.join(" ")} --without-test
   exit 0
 SCRIPT
 
