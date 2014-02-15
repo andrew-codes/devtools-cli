@@ -63,7 +63,7 @@ class Chrome < Software
           @shell.run "cmd /c assoc #{key}=#{value}", platform
           @shell.run "cmd /c ftype #{value}='#{sublime_exe_path}'", platform
         }
-        @shell.run "cmd /c ftype txtfile=#{sublime_exe_path}", platform
+        @shell.run "cmd /c ftype txtfile='#{sublime_exe_path}'", platform
       end
     end
   end
