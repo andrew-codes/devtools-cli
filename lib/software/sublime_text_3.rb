@@ -26,6 +26,11 @@ class Chrome < Software
           '.log' => 'logfile',
           '.yml' => 'yamlfile',
           '.json' => 'JSFile',
+          '.coffee' => 'JSFile',
+          '.css' => 'CSSfile',
+          '.sass' => 'CSSfile',
+          '.scss' => 'CSSfile',
+          '.less' => 'CSSfile'
       }
     end
     set_environment_path platform
