@@ -19,6 +19,9 @@ namespace :common do
   task :parameters, :parameters do |t, args|
     ARGV.shift
     platform = ARGV[0].to_sym
+    task platform do
+      ;
+    end
     ARGV.shift
     ARGV.each do |arg|
       item = arg.to_sym
