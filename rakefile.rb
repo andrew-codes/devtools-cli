@@ -5,13 +5,16 @@ require 'git'
 require 'fileutils'
 require 'configatron'
 require_relative 'lib/software_library'
-require_relative 'lib/supported_software'
+require_relative 'lib/software'
+Dir['lib/software/*.rb'].each { |file|
+  require_relative file
+}
 
 configatron.home = Dir.home
 configatron.devtools = "#{Dir.home}/devtools"
 platform = :windows
 software_to_provision = []
-supported_software = SupportedSoftware.get_all
+supported_software = Software.list
 software_library = SoftwareLibrary.new supported_software
 
 namespace :common do
