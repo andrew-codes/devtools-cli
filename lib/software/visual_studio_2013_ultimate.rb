@@ -2,7 +2,7 @@ require_relative '../software'
 
 class VisualStudio2013Ultimate < Software
   def name
-    :visual_studio_2012
+    :visual_studio_2013
   end
 
   def install_for(platform)
