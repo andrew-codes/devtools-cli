@@ -25,7 +25,7 @@ class Chrome < Software
       @file_associations = {
           '.log' => 'logfile',
           '.yml' => 'yamlfile',
-          '.json' => 'jsfile',
+          '.json' => 'JSFile',
       }
     end
     set_environment_path platform
