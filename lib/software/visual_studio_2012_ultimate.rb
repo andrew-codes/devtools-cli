@@ -7,10 +7,10 @@ class VisualStudio2012Ultimate < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst VisualStudio2012Ultimate'
-      @shell.run 'cinst Dogtail.VS2012.3'
-      @shell.run 'cinst ReSharper'
-      @shell.run 'cinst dotPeek'
+      @shell.run 'cinst VisualStudio2012Ultimate', platform
+      @shell.run 'cinst Dogtail.VS2012.3', platform
+      @shell.run 'cinst ReSharper', platform
+      @shell.run 'cinst dotPeek', platform
     end
   end
 

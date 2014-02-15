@@ -7,7 +7,7 @@ class RavenDb < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst RavenDb'
+      @shell.run 'cinst RavenDb', platform
     end
   end
 

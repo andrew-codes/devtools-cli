@@ -14,7 +14,7 @@ class Chrome < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst SublimeText3'
+      @shell.run 'cinst SublimeText3', platform
     end
   end
 
@@ -40,15 +40,15 @@ class Chrome < Software
   end
 
   def install_packages(platform)
-         if platform == :windows
-           package_control = "#{@packages_path}/Package Control"
-           FileUtils.mkpath package_control
-           repo = Git.clone('https://github.com/wbond/sublime_package_control.git', '', :path => package_control)
-           repo.pull
-           user_packages_path = "#{@packages_path}/User"
-           FileUtils.mkpath user_packages_path
-           FileUtils.cp "#{configatron.devtools}/settings/global/sublime-text-3/packages.sublime-settings", "#{configatron.home}/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings"
-         end
+    if platform == :windows
+      package_control = "#{@packages_path}/Package Control"
+      FileUtils.mkpath package_control
+      repo = Git.clone('https://github.com/wbond/sublime_package_control.git', '', :path => package_control)
+      repo.pull
+      user_packages_path = "#{@packages_path}/User"
+      FileUtils.mkpath user_packages_path
+      FileUtils.cp "#{configatron.devtools}/settings/global/sublime-text-3/packages.sublime-settings", "#{configatron.home}/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings"
+    end
   end
 
   def set_file_associations(platform)
@@ -56,10 +56,10 @@ class Chrome < Software
       if platform == :windows
         sublime_exe_path = "'#{@sublime_path}\\sublime_text.exe'"
         @file_associations.each_pair { |key, value|
-          Shell.run "cmd /c assoc #{key}=#{value}"
-          Shell.run "cmd /c ftype #{value}=#{sublime_exe_path}"
+          @shell.run "cmd /c assoc #{key}=#{value}", platform
+          @shell.run "cmd /c ftype #{value}=#{sublime_exe_path}", platform
         }
-        Shell.run "cmd /c ftype txtfile=#{sublime_exe_path}"
+        @shell.run "cmd /c ftype txtfile=#{sublime_exe_path}", platform
       end
     end
   end
@@ -71,7 +71,7 @@ class Chrome < Software
   def set_environment_path(platform)
     unless @sublime_path == ''
       if platform == :windows
-        @shell.run "Add-PathVariable '#{@sublime_path}'"
+        @shell.run "Add-PathVariable '#{@sublime_path}'", platform
       end
     end
   end

@@ -7,7 +7,7 @@ class DiffMerge < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst DiffMerge'
+      @shell.run 'cinst DiffMerge', platform
     end
   end
 

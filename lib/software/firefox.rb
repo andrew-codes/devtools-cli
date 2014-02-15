@@ -7,7 +7,7 @@ class FireFox < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst Firefox'
+      @shell.run 'cinst Firefox', platform
     end
   end
 

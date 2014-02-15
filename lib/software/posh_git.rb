@@ -7,7 +7,7 @@ class PoshGit < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst poshgit'
+      @shell.run 'cinst poshgit', platform
     end
   end
 

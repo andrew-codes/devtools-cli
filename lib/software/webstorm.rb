@@ -7,7 +7,7 @@ class WebStorm < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst WebStorm'
+      @shell.run 'cinst WebStorm', platform
     end
   end
 

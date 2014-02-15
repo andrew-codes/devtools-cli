@@ -7,8 +7,8 @@ class MySql< Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst mysql'
-      @shell.run 'cinst mysql.workbench'
+      @shell.run 'cinst mysql', platform
+      @shell.run 'cinst mysql.workbench', platform
     end
   end
 

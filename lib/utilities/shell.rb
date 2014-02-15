@@ -1,10 +1,9 @@
 class Shell
-  def initialize(platform)
-    @platform = platform
+  def initialize
   end
 
-  def self.run(command)
-    if @platform == :windows
+  def self.run(command, platform)
+    if platform == :windows
       system "powershell.exe #{command} && exit"
     else
       system command

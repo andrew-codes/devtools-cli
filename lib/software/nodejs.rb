@@ -7,11 +7,11 @@ class Nodejs < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst nodejs'
+      @shell.run 'cinst nodejs', platform
     end
-    @shell.run 'npm install grunt-cli -g'
-    @shell.run 'npm install gulp -g'
-    @shell.run 'npm install yeoman -g'
+    @shell.run 'npm install grunt-cli -g', platform
+    @shell.run 'npm install gulp -g', platform
+    @shell.run 'npm install yeoman -g', platform
   end
 
   def configure_for(platform)

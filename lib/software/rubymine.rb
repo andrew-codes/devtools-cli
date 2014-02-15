@@ -7,7 +7,7 @@ class RubyMine < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst RubyMine'
+      @shell.run 'cinst RubyMine', platform
     end
   end
 

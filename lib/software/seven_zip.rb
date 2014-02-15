@@ -7,7 +7,7 @@ class SevenZip < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst 7zip'
+      @shell.run 'cinst 7zip', platform
     end
   end
 

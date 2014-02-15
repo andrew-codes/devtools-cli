@@ -7,9 +7,9 @@ class VisualStudio2013Ultimate < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst VisualStudio2013Ultimate'
-      @shell.run 'cinst ReSharper'
-      @shell.run 'cinst dotPeek'
+      @shell.run 'cinst VisualStudio2013Ultimate', platform
+      @shell.run 'cinst ReSharper', platform
+      @shell.run 'cinst dotPeek', platform
     end
   end
 

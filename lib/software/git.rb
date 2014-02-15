@@ -13,7 +13,7 @@ class Git < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run("cinst 'git'")
+      @shell.run "cinst 'git'", platform
     end
   end
 
@@ -37,7 +37,7 @@ class Git < Software
 
   def add_to_path(platform)
     if platform == :windows
-      @shell.run "Add-PathVariable 'C:\\Program Files (x86)\\Git\\bin'"
+      @shell.run "Add-PathVariable 'C:\\Program Files (x86)\\Git\\bin'", platform
     end
   end
 

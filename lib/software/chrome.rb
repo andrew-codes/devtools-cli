@@ -7,7 +7,7 @@ class Chrome < Software
 
   def install_for(platform)
     if platform == :windows
-      @shell.run 'cinst GoogleChrome'
+      @shell.run 'cinst GoogleChrome', platform
     end
   end
 
