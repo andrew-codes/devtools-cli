@@ -1,5 +1,5 @@
-require 'software_installer'
-require 'utilities/shell'
+require_relative 'software_installer'
+require_relative 'utilities/shell'
 
 class Software
   def initialize(shell)
