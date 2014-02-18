@@ -1,0 +1,103 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/Description/@EntryValue">jasmine test</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/Text/@EntryValue">define(function(require) {&#xD;
+    'use strict';&#xD;
+    &#xD;
+    var Squire = require('squire');&#xD;
+    var AsyncSpec = require('asyncSpec');&#xD;
+    &#xD;
+    describe('$SUT$', function() {&#xD;
+        var squire;&#xD;
+        var sut;&#xD;
+        beforeEach(function(){&#xD;
+            squire = new Squire();&#xD;
+            sut = null;&#xD;
+        });        &#xD;
+    });&#xD;
+});</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/CustomProperties/=FileName/@EntryIndexedValue">NewFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/CustomProperties/=Extension/@EntryIndexedValue">js</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/Scope/=C049D1F3598F294DAC47F8162209A25A/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/Scope/=C049D1F3598F294DAC47F8162209A25A/Type/@EntryValue">InRazorCSharpProject</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/Field/=SUT/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=61A54BEA27BED4428C726F2126D1F257/Field/=SUT/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E05B04EA4EB33A44A51B3760697E63A9/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E05B04EA4EB33A44A51B3760697E63A9/Description/@EntryValue">requirejs style module</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E05B04EA4EB33A44A51B3760697E63A9/Text/@EntryValue">define(function(require) {&#xD;
+    'use strict';&#xD;
+    &#xD;
+    return {};&#xD;
+});</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E05B04EA4EB33A44A51B3760697E63A9/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E05B04EA4EB33A44A51B3760697E63A9/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E05B04EA4EB33A44A51B3760697E63A9/CustomProperties/=FileName/@EntryIndexedValue">NewFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E05B04EA4EB33A44A51B3760697E63A9/CustomProperties/=Extension/@EntryIndexedValue">tjs</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E05B04EA4EB33A44A51B3760697E63A9/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E05B04EA4EB33A44A51B3760697E63A9/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E05B04EA4EB33A44A51B3760697E63A9/Scope/=C049D1F3598F294DAC47F8162209A25A/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=E05B04EA4EB33A44A51B3760697E63A9/Scope/=C049D1F3598F294DAC47F8162209A25A/Type/@EntryValue">InRazorCSharpProject</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EAAAAA9310512C4FB219E3894F387F87/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EAAAAA9310512C4FB219E3894F387F87/Description/@EntryValue">html-view</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EAAAAA9310512C4FB219E3894F387F87/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EAAAAA9310512C4FB219E3894F387F87/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EAAAAA9310512C4FB219E3894F387F87/CustomProperties/=FileName/@EntryIndexedValue">NewFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EAAAAA9310512C4FB219E3894F387F87/CustomProperties/=Extension/@EntryIndexedValue">html</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EAAAAA9310512C4FB219E3894F387F87/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EAAAAA9310512C4FB219E3894F387F87/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EAAAAA9310512C4FB219E3894F387F87/Scope/=C049D1F3598F294DAC47F8162209A25A/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=EAAAAA9310512C4FB219E3894F387F87/Scope/=C049D1F3598F294DAC47F8162209A25A/Type/@EntryValue">InRazorCSharpProject</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/Description/@EntryValue">mocha test</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/Text/@EntryValue">/*global describe, beforeEach, it*/&#xD;
+'use strict';&#xD;
+&#xD;
+var chai = require('chai');&#xD;
+var sinon = require('sinon');&#xD;
+var sinonChai = require('sinon-chai');&#xD;
+chai.should();&#xD;
+chai.use(sinonChai);&#xD;
+var proxy = require('proxyquire');&#xD;
+&#xD;
+describe('$SUT$', function () {&#xD;
+    var sut;&#xD;
+    beforeEach(function () {&#xD;
+        sut = proxy('$SUT_RELATIVE_PATH$', {&#xD;
+        });        &#xD;
+    });&#xD;
+});</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/CustomProperties/=FileName/@EntryIndexedValue">NewFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/CustomProperties/=Extension/@EntryIndexedValue">js</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/Scope/=C049D1F3598F294DAC47F8162209A25A/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/Scope/=C049D1F3598F294DAC47F8162209A25A/Type/@EntryValue">InRazorCSharpProject</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/Field/=SUT/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/Field/=SUT/InitialRange/@EntryValue">2</s:Int64>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/Field/=SUT/Order/@EntryValue">0</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/Field/=SUT_005FRELATIVE_005FPATH/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=19180F984027C24B9FE1B3DFE90F6EAC/Field/=SUT_005FRELATIVE_005FPATH/Order/@EntryValue">1</s:Int64>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/Description/@EntryValue">node style module</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/Text/@EntryValue">'use strict';&#xD;
+&#xD;
+var $NAME$ = {&#xD;
+};&#xD;
+S&#xD;
+module.exports = $NAME$;</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/CustomProperties/=FileName/@EntryIndexedValue">NewFile</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/CustomProperties/=Extension/@EntryIndexedValue">js</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/CustomProperties/=ValidateFileName/@EntryIndexedValue">True</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/Applicability/=File/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/Scope/=C049D1F3598F294DAC47F8162209A25A/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/Scope/=C049D1F3598F294DAC47F8162209A25A/Type/@EntryValue">InRazorCSharpProject</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/Field/=NAME/@KeyIndexDefined">True</s:Boolean>
+	<s:Int64 x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=272864F2937FBF4F9457841602D8FF89/Field/=NAME/Order/@EntryValue">0</s:Int64></wpf:ResourceDictionary>
