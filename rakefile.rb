@@ -11,7 +11,7 @@ Dir['lib/software/*.rb'].each { |file|
 }
 
 configatron.home = Dir.home
-configatron.devtools = 'c:/devtools'
+configatron.devtools = "#{configatron.home}/devtools"
 platform = :windows
 software_to_provision = []
 supported_software = Software.list
