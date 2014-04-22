@@ -4,109 +4,50 @@
 ;Description:
 ;  Shortcuts for Visual Studio/ReSharper and WebStorm to match WebStorm in OSX.
 ;=======================================================================================
-vsModeEnabledIcon := "icon-visual-studio-mode.ico"
-webStormEnabledIcon := "icon-webstorm-mode.ico"
-noModeEnabledIcon := "icon-no-mode.ico"
-IsInVisualStudioMode := false
-IsInWebStormModel := false
-SetNoMode()
 
 ;==========================
-;Set no tool mode
-;==========================
-SetNoMode() {
-  IsInVisualStudioMode := false
-  IsInWebStormModel := false
-  Menu, Tray, Icon, %noModeEnabledIcon%,
-  Menu, Tray, Tip, No tool mode enabled
-}
-
-;==========================
-;Set Visual Studio mode
-;==========================
-SetVisualStudioMode() {
-  SetNoMode()
-  IsInVisualStudioMode := true
-  Menu, Tray, Icon, %vsModeEnabledIcon%,
-  Menu, Tray, Tip, Visual Studio mode enabled
-}
-
-;==========================
-;Set WebStorm mode
-;==========================
-SetWebStormMode() {
-  SetNoMode()
-  IsInWebStormMode := true
-  Menu, Tray, Icon, %webStormModeEnabledIcon%,
-  Menu, Tray, Tip, WebStorm mode enabled
-}
-
-;==========================
-;Enable Visual Studio mode
-;==========================
-RWin & F3::
-  SetVisualStudioMode()
-return
-
-;==========================
-;Enable WebStorm mode
-;==========================
-RWin & F4::
-  SetWebStormMode()
-return
-
-;==========================
-;Escape tooling mode
-;==========================
-;Map to escape or shift + escape
-RWin & F2::
-  SetNoMode()
-return
-
-;==========================
-;Windows Key
+;Insert new file template
 ;==========================
 LWin::
-  if (IsInVisualStudioMode) {
-    Send {Ctrl}
-  } else if (IsInWebStormMode){
-    Send {Ctrl}
-  } else {
-    Send {LWin}
-  }
+  Send ^
 return
 
 ;==========================
 ;Insert new file template
 ;==========================
 LWin & n::
-  if (IsInVisualStudioMode) {
-    Send {Ctrl}{Alt}{Ins}
-  } else if (IsInWebStormMode){
-    Send {Alt}{Ins}
-  } else {
-    Send {LWin}n
+  WinGet, active_process_name, ProcessName, A
+  if (active_process_name = "devenv.exe") {
+    Send ^!{Ins}
+  } else if (active_process_name = "WebStorm.exe") {
+     SendEvent !{Ins}
   }
 return
 
 ;==========================
 ;Search everywhere
 ;==========================
-LShift & LShift::
-  if (IsInVisualStudioMode) {
-    Send {Ctrl}t
-  } else {
-    Send, {LShift 2}
+lastShift := 0
+LShift::
+if ((A_TickCount - lastShift) <= 250) {
+  WinGet, active_process_name, ProcessName, A
+  if (active_process_name = "devenv.exe") {
+    Send ^t
   }
+} else {
+  Send {Shift}
+}
+lastShift := A_TickCount
 return
 
 ;==========================
 ;Search by class name
 ;==========================
 LWin & o::
-  if (IsInVisualStudioMode) {
-    Send {Shift}{Alt}t
-  } else if (IsInWebStormMode){
+  WinGet, active_process_name, ProcessName, A
+  if (active_process_name = "devenv.exe") {
+    Send {Shift down}!t{Shift up}
+  } else if (active_process_name = "WebStorm.exe") {
     Send {Ctrl}n
   } else {
     Send {LWin}o
@@ -118,12 +59,13 @@ return
 ;==========================
 LAlt & o::
   if GetKeyState("LWin","P") {
-    if (IsInVisualStudioMode) {
-      Send {Alt}\
-    } else if (IsInWebStormMode){
-      Send {Ctrl}{Alt}{Shift}n
+    WinGet, active_process_name, ProcessName, A
+    if (active_process_name = "devenv.exe") {
+      Send !\
+    } else if (active_process_name = "WebStorm.exe") {
+      Send ^!{Shift}n
     } else {
-      Send {LWin}{LAlt}o
+      Send {LWin}!o
     }
   }
 return
@@ -133,10 +75,11 @@ return
 ;==========================
 LShift & o::
   if GetKeyState("LWin","P") {
-    if (IsInVisualStudioMode) {
-      Send  {Ctrl}{Shift}t
-    } else if (IsInWebStormMode){
-      Send {Ctrl}{Shift}n
+    WinGet, active_process_name, ProcessName, A
+    if (active_process_name = "devenv.exe") {
+      Send  {Shift down}^t{Shift up}
+    } else if (active_process_name = "WebStorm.exe") {
+      Send ^{Shift}n
     } else {
       Send {LWin}{LShift}o
     }
@@ -144,11 +87,28 @@ LShift & o::
 return
 
 ;==========================
+;Search by file name
+;==========================
+LWin & g::
+  WinGet, active_process_name, ProcessName, A
+  if (active_process_name = "devenv.exe") {
+    Send  ^g
+  } else if (active_process_name = "WebStorm.exe") {
+    Send ^g
+  } else {
+    Send {LWin}g
+  }
+return
+
+;==========================
 ;Line comment
 ;==========================
 LWin & /::
-  if (IsInVisualStudioMode) {
-    Send {Ctrl}{Alt}/
+  WinGet, active_process_name, ProcessName, A
+  if (active_process_name = "devenv.exe") {
+    Send ^!/
+  } else if (active_process_name = "WebStorm.exe") {
+    Send ^/
   } else {
     Send {LWin}/
   }
@@ -159,10 +119,11 @@ return
 ;==========================
 LAlt & l::
   if GetKeyState("LWin","P") {
-    if (IsInVisualStudioMode) {
-      Send {Ctrl down}{e down}{Ctrl up}{e up}d
+    WinGet, active_process_name, ProcessName, A
+    if (active_process_name = "devenv.exe") {
+      Send ^ed
     } else {
-      Send {LWin}{LAlt}l
+      Send {LWin}!l
     }
   }
 return
@@ -171,8 +132,9 @@ return
 ;Refactor rename
 ;==========================
 Shift & F6::
-  if (IsInVisualStudioMode) {
-    Send {Ctrl down}{r down}{Ctrl up}{r up}r
+  WinGet, active_process_name, ProcessName, A
+  if (active_process_name = "devenv.exe") {
+    Send ^rr
   } else {
     Send {Shift}{F6}
   }
@@ -182,8 +144,9 @@ return
 ;Refactor move
 ;==========================
 F6::
-  if (IsInVisualStudioMode) {
-    Send {Ctrl down}{r down}{Ctrl up}{r up}o
+  WinGet, active_process_name, ProcessName, A
+  if (active_process_name = "devenv.exe") {
+    Send ^ro
   } else {
     Send {F6}
   }
@@ -193,10 +156,11 @@ return
 ;Refactor this
 ;==========================
 Ctrl & t::
-  if (IsInVisualStudioMode) {
-    Send {Ctrl}{Shift}r
+  WinGet, active_process_name, ProcessName, A
+  if (active_process_name = "devenv.exe") {
+    Send {Shift down}^r{Shift up}
   } else {
-    Send {Ctrl}t
+    Send ^t
   }
 return
 
@@ -204,10 +168,25 @@ return
 ;Navigate backwards
 ;==========================
 LWin & [::
-  if (IsInVisualStudioMode) {
-    Send {Ctrl}{Shift}{BS}
+  WinGet, active_process_name, ProcessName, A
+  if (active_process_name = "devenv.exe") {
+    Send {Shift down}^{BS}{Shift up}
+  } else if (active_process_name = "WebStorm.exe") {
+    Send ^[
   } else {
     Send {LWin}[
+  }
+return
+
+;==========================
+;Navigate forwards
+;==========================
+LWin & ]::
+  WinGet, active_process_name, ProcessName, A
+  if (active_process_name = "WebStorm.exe") {
+    Send ^]
+  } else {
+    Send {LWin}]
   }
 return
 
@@ -216,10 +195,13 @@ return
 ;==========================
 Shift & Up::
   if GetKeyState("LWin","P") {
-    if (IsInVisualStudioMode) {
-      Send {Ctrl}{Shift}{Alt}{Up}
+    WinGet, active_process_name, ProcessName, A
+    if (active_process_name = "devenv.exe") {
+      Send {Shift down}^!{Up}{Shift up}
+    } else if (active_process_name = "WebStorm.exe") {
+      Send {Shift down}^{Up}{Shift up}
     } else {
-      Send {Shift}{LWin}{Up}
+      Send {LWin}{Shift}{Up}
     }
   }
 return
@@ -229,10 +211,13 @@ return
 ;==========================
 Shift & Down::
   if GetKeyState("LWin","P") {
-if (IsInVisualStudioMode) {
-      Send {Ctrl}{Shift}{Alt}{Down}
+    WinGet, active_process_name, ProcessName, A
+    if (active_process_name = "devenv.exe") {
+      Send {Shift down}^!{Down}{Shift up}
+    } else if (active_process_name = "WebStorm.exe") {
+      Send {Shift down}^{Down}{Shift up}
     } else {
-      Send {Shift}{LWin}{Down}
+      Send {LWin}{Shift}{Down}
     }
   }
 return
@@ -242,10 +227,13 @@ return
 ;==========================
 Shift & Left::
   if GetKeyState("LWin","P") {
-    if (IsInVisualStudioMode) {
-      Send {Ctrl}{Shift}{Alt}{Left}
+    WinGet, active_process_name, ProcessName, A
+    if (active_process_name = "devenv.exe") {
+      Send {Shift down}^!{Left}{Shift up}
+    } else if (active_process_name = "WebStorm.exe") {
+      Send {Shift down}^{Left}{Shift up}
     } else {
-      Send {Shift}{LWin}{Left}
+      Send {LWin}{Shift}{Left}
     }
   }
 return
@@ -255,10 +243,13 @@ return
 ;==========================
 Shift & Right::
   if GetKeyState("LWin","P") {
-  if (IsInVisualStudioMode) {
-      Send {Ctrl}{Shift}{Alt}{Right}
+    WinGet, active_process_name, ProcessName, A
+    if (active_process_name = "devenv.exe") {
+      Send {Shift down}^!{Right}{Shift up}
+    } else if (active_process_name = "WebStorm.exe") {
+      Send {Shift down}^{Right}{Shift up}
     } else {
-      Send {Shift}{LWin}{Right}
+      Send {LWin}{Shift}{Right}
     }
   }
 return
