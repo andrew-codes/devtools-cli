@@ -4,9 +4,9 @@
 ;Description:
 ;  Shortcuts for Visual Studio/ReSharper and WebStorm to match WebStorm in OSX.
 ;=======================================================================================
-vsModeEnabledIcon := "icon-visual-studio-mode.png"
-webStormEnabledIcon = "icon-webstorm-mode.png"
-noModeEnabledIcon := "icon-no-mode.png"
+vsModeEnabledIcon := "icon-visual-studio-mode.ico"
+webStormEnabledIcon = "icon-webstorm-mode.ico"
+noModeEnabledIcon := "icon-no-mode.ico"
 IsInVisualStudioMode := false
 IsInWebStormModel := false
 SetNoMode()
