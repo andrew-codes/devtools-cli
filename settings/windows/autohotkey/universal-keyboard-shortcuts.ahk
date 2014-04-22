@@ -17,7 +17,7 @@ SetNoMode()
 SetNoMode() {
   IsInVisualStudioMode := false
   IsInWebStormModel := false
-  Menu, Tray, Icon, noModeEnabledIcon,
+  Menu, Tray, Icon, %noModeEnabledIcon%,
   Menu, Tray, Tip, No tool mode enabled
 }
 
@@ -27,7 +27,7 @@ SetNoMode() {
 SetVisualStudioMode() {
   SetNoMode()
   IsInVisualStudioMode := true
-  Menu, Tray, Icon, vsModeEnabledIcon,
+  Menu, Tray, Icon, %vsModeEnabledIcon%,
   Menu, Tray, Tip, Visual Studio mode enabled
 }
 
@@ -37,21 +37,21 @@ SetVisualStudioMode() {
 SetWebStormMode() {
   SetNoMode()
   IsInWebStormMode := true
-  Menu, Tray, Icon, webStormModeEnabledIcon,
+  Menu, Tray, Icon, %webStormModeEnabledIcon%,
   Menu, Tray, Tip, WebStorm mode enabled
 }
 
 ;==========================
 ;Enable Visual Studio mode
 ;==========================
-RWin & v::
+RWin & F2::
   SetVisualStudioMode()
 return
 
 ;==========================
 ;Enable WebStorm mode
 ;==========================
-RWin & w::
+RWin & F3::
   SetWebStormMode()
 return
 
@@ -59,7 +59,7 @@ return
 ;Escape tooling mode
 ;==========================
 ;Map to escape or shift + escape
-RWin & e::
+RWin & F1::
   SetNoMode()
 return
 
