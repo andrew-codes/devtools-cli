@@ -15,11 +15,9 @@ SetNoMode()
 ;Set no tool mode
 ;==========================
 SetNoMode() {
-  local iconFile := noModeEnabledIcon
-
   IsInVisualStudioMode := false
   IsInWebStormModel := false
-  Menu, Tray, Icon, %iconFile%,
+  Menu, Tray, Icon, noModeEnabledIcon,
   Menu, Tray, Tip, No tool mode enabled
 }
 
@@ -28,10 +26,8 @@ SetNoMode() {
 ;==========================
 SetVisualStudioMode() {
   SetNoMode()
-  local iconFile := vsModeEnabledIcon
-
   IsInVisualStudioMode := true
-  Menu, Tray, Icon, %iconFile%,
+  Menu, Tray, Icon, vsModeEnabledIcon,
   Menu, Tray, Tip, Visual Studio mode enabled
 }
 
@@ -40,10 +36,8 @@ SetVisualStudioMode() {
 ;==========================
 SetWebStormMode() {
   SetNoMode()
-  local iconFile := webStormModeEnabledIcon
-
   IsInWebStormMode := true
-  Menu, Tray, Icon, %iconFile%,
+  Menu, Tray, Icon, webStormModeEnabledIcon,
   Menu, Tray, Tip, WebStorm mode enabled
 }
 
@@ -100,7 +94,7 @@ return
 ;==========================
 LShift & LShift::
   if (IsInVisualStudioMode) {
-    Send, Ctrl T
+    Send, Ctrl t
   } else {
     Send, LShift LShift
   }
@@ -122,26 +116,30 @@ return
 ;==========================
 ;Search by symbol name
 ;==========================
-LWin & LAlt & o::
-  if (IsInVisualStudioMode) {
-    Send, Alt \
-  } else if (IsInWebStormMode){
-    Send, Ctrl Alt Shift n
-  } else {
-    Send, LWin LAlt o
+LAlt & o::
+  if GetKeyState("LWin","P") {
+    if (IsInVisualStudioMode) {
+      Send, Alt \
+    } else if (IsInWebStormMode){
+      Send, Ctrl Alt Shift n
+    } else {
+      Send, LWin LAlt o
+    }
   }
 return
 
 ;==========================
 ;Search by file name
 ;==========================
-LWin & LShift & o::
-  if (IsInVisualStudioMode) {
-    Send, Ctrl Shift T
-  } else if (IsInWebStormMode){
-    Send, Ctrl Shift n
-  } else {
-    Send, LWin LShift o
+LShift & o::
+  if GetKeyState("LWin","P") {
+    if (IsInVisualStudioMode) {
+      Send, Ctrl Shift T
+    } else if (IsInWebStormMode){
+      Send, Ctrl Shift n
+    } else {
+      Send, LWin LShift o
+    }
   }
 return
 
@@ -159,11 +157,13 @@ return
 ;==========================
 ;Reformat code
 ;==========================
-LWin & LAlt & l::
-  if (IsInVisualStudioMode) {
-    Send, Ctrl e, d
-  } else {
-    Send, LWin LAlt l
+LAlt & l::
+  if GetKeyState("LWin","P") {
+    if (IsInVisualStudioMode) {
+      Send, Ctrl e, d
+    } else {
+      Send, LWin LAlt l
+    }
   }
 return
 
@@ -192,7 +192,7 @@ return
 ;==========================
 ;Refactor this
 ;==========================
-Ctrl t::
+Ctrl & t::
   if (IsInVisualStudioMode) {
     Send, Ctrl Shift r
   } else {
@@ -214,43 +214,51 @@ return
 ;==========================
 ;Move Line up
 ;==========================
-Shift & LWin & Up::
-  if (IsInVisualStudioMode) {
-    Send, Ctrl Shift Alt Up
-  } else {
-    Send, Shift & LWin & Up
+Shift & Up::
+  if GetKeyState("LWin","P") {
+    if (IsInVisualStudioMode) {
+      Send, Ctrl Shift Alt Up
+    } else {
+      Send, Shift & LWin & Up
+    }
   }
 return
 
 ;==========================
 ;Move Line down
 ;==========================
-Shift & LWin & Down::
-  if (IsInVisualStudioMode) {
-    Send, Ctrl Shift Alt Down
-  } else {
-    Send, Shift & LWin & Down
+Shift & Down::
+  if GetKeyState("LWin","P") {
+    if (IsInVisualStudioMode) {
+      Send, Ctrl Shift Alt Down
+    } else {
+      Send, Shift & LWin & Down
+    }
   }
 return
 
 ;==========================
 ;Move Line left
 ;==========================
-Shift & LWin & Left::
-  if (IsInVisualStudioMode) {
-    Send, Ctrl Shift Alt Left
-  } else {
-    Send, Shift & LWin & Left
+Shift & Left::
+  if GetKeyState("LWin","P") {
+    if (IsInVisualStudioMode) {
+      Send, Ctrl Shift Alt Left
+    } else {
+      Send, Shift & LWin & Left
+    }
   }
 return
 
 ;==========================
 ;Move Line right
 ;==========================
-Shift & LWin & Right::
-  if (IsInVisualStudioMode) {
-    Send, Ctrl Shift Alt Right
-  } else {
-    Send, Shift & LWin & Right
+Shift & Right::
+  if GetKeyState("LWin","P") {
+    if (IsInVisualStudioMode) {
+      Send, Ctrl Shift Alt Right
+    } else {
+      Send, Shift & LWin & Right
+    }
   }
 return
