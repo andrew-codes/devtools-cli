@@ -20,7 +20,7 @@ LWin & n::
   if (active_process_name = "devenv.exe") {
     Send ^!{Ins}
   } else if (active_process_name = "WebStorm.exe") {
-     SendEvent !{Ins}
+     Send !{Ins}
   }
 return
 
