@@ -9,3 +9,5 @@ foreach ($pathItem in $addToUserPath) {
     $env:PATH += ";$pathItem"
   }
 }
+
+cd ~/Developer/Repositories
