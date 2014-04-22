@@ -5,7 +5,7 @@
 ;  Shortcuts for Visual Studio/ReSharper and WebStorm to match WebStorm in OSX.
 ;=======================================================================================
 vsModeEnabledIcon := "icon-visual-studio-mode.ico"
-webStormEnabledIcon = "icon-webstorm-mode.ico"
+webStormEnabledIcon := "icon-webstorm-mode.ico"
 noModeEnabledIcon := "icon-no-mode.ico"
 IsInVisualStudioMode := false
 IsInWebStormModel := false
@@ -44,14 +44,14 @@ SetWebStormMode() {
 ;==========================
 ;Enable Visual Studio mode
 ;==========================
-RWin & F2::
+RWin & F3::
   SetVisualStudioMode()
 return
 
 ;==========================
 ;Enable WebStorm mode
 ;==========================
-RWin & F3::
+RWin & F4::
   SetWebStormMode()
 return
 
@@ -59,7 +59,7 @@ return
 ;Escape tooling mode
 ;==========================
 ;Map to escape or shift + escape
-RWin & F1::
+RWin & F2::
   SetNoMode()
 return
 
@@ -68,11 +68,11 @@ return
 ;==========================
 LWin::
   if (IsInVisualStudioMode) {
-    Send, Ctrl
+    Send {Ctrl}
   } else if (IsInWebStormMode){
-    Send, Ctrl
+    Send {Ctrl}
   } else {
-    Send, LWin
+    Send {LWin}
   }
 return
 
@@ -81,11 +81,11 @@ return
 ;==========================
 LWin & n::
   if (IsInVisualStudioMode) {
-    Send, Ctrl Alt Ins
+    Send {Ctrl}{Alt}{Ins}
   } else if (IsInWebStormMode){
-    Send, Alt Ins
+    Send {Alt}{Ins}
   } else {
-    Send, LWin n
+    Send {LWin}n
   }
 return
 
@@ -94,9 +94,9 @@ return
 ;==========================
 LShift & LShift::
   if (IsInVisualStudioMode) {
-    Send, Ctrl t
+    Send {Ctrl}t
   } else {
-    Send, LShift LShift
+    Send, {LShift 2}
   }
 return
 
@@ -105,11 +105,11 @@ return
 ;==========================
 LWin & o::
   if (IsInVisualStudioMode) {
-    Send, Shift Alt t
+    Send {Shift}{Alt}t
   } else if (IsInWebStormMode){
-    Send, Ctrl n
+    Send {Ctrl}n
   } else {
-    Send, LWin o
+    Send {LWin}o
   }
 return
 
@@ -119,11 +119,11 @@ return
 LAlt & o::
   if GetKeyState("LWin","P") {
     if (IsInVisualStudioMode) {
-      Send, Alt \
+      Send {Alt}\
     } else if (IsInWebStormMode){
-      Send, Ctrl Alt Shift n
+      Send {Ctrl}{Alt}{Shift}n
     } else {
-      Send, LWin LAlt o
+      Send {LWin}{LAlt}o
     }
   }
 return
@@ -134,11 +134,11 @@ return
 LShift & o::
   if GetKeyState("LWin","P") {
     if (IsInVisualStudioMode) {
-      Send, Ctrl Shift T
+      Send  {Ctrl}{Shift}t
     } else if (IsInWebStormMode){
-      Send, Ctrl Shift n
+      Send {Ctrl}{Shift}n
     } else {
-      Send, LWin LShift o
+      Send {LWin}{LShift}o
     }
   }
 return
@@ -148,9 +148,9 @@ return
 ;==========================
 LWin & /::
   if (IsInVisualStudioMode) {
-    Send, Ctrl Alt /
+    Send {Ctrl}{Alt}/
   } else {
-    Send, LWin /
+    Send {LWin}/
   }
 return
 
@@ -160,9 +160,9 @@ return
 LAlt & l::
   if GetKeyState("LWin","P") {
     if (IsInVisualStudioMode) {
-      Send, Ctrl e, d
+      Send {Ctrl down}{e down}{Ctrl up}{e up}d
     } else {
-      Send, LWin LAlt l
+      Send {LWin}{LAlt}l
     }
   }
 return
@@ -172,9 +172,9 @@ return
 ;==========================
 Shift & F6::
   if (IsInVisualStudioMode) {
-    Send, Ctrl r, r
+    Send {Ctrl down}{r down}{Ctrl up}{r up}r
   } else {
-    Send, Shift F6
+    Send {Shift}{F6}
   }
 return
 
@@ -183,9 +183,9 @@ return
 ;==========================
 F6::
   if (IsInVisualStudioMode) {
-    Send, Ctrl r, o
+    Send {Ctrl down}{r down}{Ctrl up}{r up}o
   } else {
-    Send, F6
+    Send {F6}
   }
 return
 
@@ -194,9 +194,9 @@ return
 ;==========================
 Ctrl & t::
   if (IsInVisualStudioMode) {
-    Send, Ctrl Shift r
+    Send {Ctrl}{Shift}r
   } else {
-    Send, Ctrl t
+    Send {Ctrl}t
   }
 return
 
@@ -205,9 +205,9 @@ return
 ;==========================
 LWin & [::
   if (IsInVisualStudioMode) {
-    Send, Ctrl Shift BS
+    Send {Ctrl}{Shift}{BS}
   } else {
-    Send, LWin [
+    Send {LWin}[
   }
 return
 
@@ -217,9 +217,9 @@ return
 Shift & Up::
   if GetKeyState("LWin","P") {
     if (IsInVisualStudioMode) {
-      Send, Ctrl Shift Alt Up
+      Send {Ctrl}{Shift}{Alt}{Up}
     } else {
-      Send, Shift & LWin & Up
+      Send {Shift}{LWin}{Up}
     }
   }
 return
@@ -229,10 +229,10 @@ return
 ;==========================
 Shift & Down::
   if GetKeyState("LWin","P") {
-    if (IsInVisualStudioMode) {
-      Send, Ctrl Shift Alt Down
+if (IsInVisualStudioMode) {
+      Send {Ctrl}{Shift}{Alt}{Down}
     } else {
-      Send, Shift & LWin & Down
+      Send {Shift}{LWin}{Down}
     }
   }
 return
@@ -243,9 +243,9 @@ return
 Shift & Left::
   if GetKeyState("LWin","P") {
     if (IsInVisualStudioMode) {
-      Send, Ctrl Shift Alt Left
+      Send {Ctrl}{Shift}{Alt}{Left}
     } else {
-      Send, Shift & LWin & Left
+      Send {Shift}{LWin}{Left}
     }
   }
 return
@@ -255,10 +255,10 @@ return
 ;==========================
 Shift & Right::
   if GetKeyState("LWin","P") {
-    if (IsInVisualStudioMode) {
-      Send, Ctrl Shift Alt Right
+  if (IsInVisualStudioMode) {
+      Send {Ctrl}{Shift}{Alt}{Right}
     } else {
-      Send, Shift & LWin & Right
+      Send {Shift}{LWin}{Right}
     }
   }
 return
