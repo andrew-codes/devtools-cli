@@ -23,16 +23,17 @@ function setup(program) {
         .command('install')
         .description('Install to target platform')
         .action(action)
-        .option('-c, --config', 'User configuration');
+        .option('-u, --user [user]', 'User name');
 }
 
 var dist = './dist';
-function action(configuration, platform) {
+function action(platform) {
+    var configuration = './users/' + this.user + '/config.js';
     if (!fs.existsSync(configuration)){
         console.log('No configuration file specified. Did you mean to run `devtools init` first?');
         return;
     }
-    var config = require('./../' + configuration);
+    var config = require('../' + configuration);
     FileUtils.rmdir(dist)
         .then(function (dir) {
             return merge(config, {

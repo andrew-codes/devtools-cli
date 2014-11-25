@@ -1,32 +1,32 @@
 {
-  "name": "devtools",
-  "private": true,
-  "version": "0.0.0",
-  "description": "",
-  "main": "devtools.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "bin": {
-    "devtools": "devtools.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/andrew-codes/devtools.git"
-  },
-  "author": "",
-  "license": "BSD-2-Clause",
-  "bugs": {
-    "url": "https://github.com/andrew-codes/devtools/issues"
-  },
-  "dependencies": {
-    "commander": "~2.5.0",
-    "underscore": "~1.7.0",
-    "complete": "~0.4.4",
-    "require-dir": "~0.1.0",
-    "bluebird": "~2.3.11",
-    "mkdirp-then": "~1.0.0",
-    "merge": "~1.2.0",
-    "mustache": "~0.8.2"
-  }
+    "name": "devtools-cli",
+    "private": false,
+    "version": "0.0.1",
+    "description": "",
+    "main": "devtools.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "bin": {
+        "devtools": "devtools.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/andrew-codes/devtools.git"
+    },
+    "author": "Andrew Smith @andrew-codes",
+    "license": "BSD-2-Clause",
+    "bugs": {
+        "url": "https://github.com/andrew-codes/devtools/issues"
+    },
+    "dependencies": {
+        "commander": "~2.5.0",
+        "underscore": "~1.7.0",
+        "complete": "~0.4.4",
+        "require-dir": "~0.1.0",
+        "bluebird": "~2.3.11",
+        "mkdirp-then": "~1.0.0",
+        "merge": "~1.2.0",
+        "mustache": "~0.8.2"
+    }
 }

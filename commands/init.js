@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var FileUtils = require('./../lib/utils/FileUtils');
 
 var configuration = {
     getCompletion: getCompletion,
@@ -28,5 +29,10 @@ function action() {
     if (!this.user) {
         throw 'Must enter user option';
     }
-    fs.createReadStream('./settings/config.js').pipe(fs.createWriteStream('./' + this.user + '.config.js'));
+    FileUtils.mkdir('./users/' + this.user)
+        .then(function (dir) {
+            fs.createReadStream('./settings/config.js')
+                .pipe(fs.createWriteStream(dir + '/config.js'));
+
+        });
 }
