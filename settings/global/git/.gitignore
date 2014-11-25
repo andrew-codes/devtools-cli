@@ -7,3 +7,9 @@ Thumbs.db
 
 # IDE
 .idea
+*.suo
+
+# Dependencies
+node_modules
+/packages
+bower_components

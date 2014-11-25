@@ -3,18 +3,20 @@
 	email = andrew@wearesoftwarecraftsmen.com
 
 [alias]
-	ci = commit
 	cl = clean --f
+	ci = !sh -c 'git commit -am "$0"'
 	co = checkout
-	nb = checkout -b $0
-	db = branch -D $0
-	nf = checkout -b feature/$0
-	pf = pull --rebase $0 $1
+	nb = !sh -c 'git checkout -b $0'
+	db = !sh -c 'git branch -D $0'
+	nf = !sh -c 'git checkout -b feautre/$0'
+	pf = !sh -c 'git pull --rebase $0 feature/$1'
 	mt = mergetool
 	fa = fetch --all
 	rh = reset --hard
-	rb = reset --hard $0/$1
+	rb = !sh -c 'git reset --hard $0/$1'
+	rf = !sh -c 'git reset --hard $0/feature/$1'
 	st = status
+	gui = !sh -c '/usr/local/git/libexec/git-core/git-gui'
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 	{{{ alias }}}
 
@@ -29,7 +31,7 @@
 	cmd = diffmerge -merge -result="$PWD/$MERGED" "$PWD/$LOCAL" "$PWD/$BASE" "$PWD/$REMOTE"
 
 [difftool "diffmerge"]
-	cmd = cmd = diffmerge "$LOCAL" "$REMOTE"
+	cmd = diffmerge "$LOCAL" "$REMOTE"
 
 [push]
 	default = simple
@@ -38,4 +40,9 @@
 	autosetuprebase = always
 
 [core]
-	excludesfile = {{ gitignore }}
+	excludesfile = ~/.gitignore
+	autocrlf = input
+
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
