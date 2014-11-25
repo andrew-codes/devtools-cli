@@ -23,6 +23,10 @@
     "commander": "~2.5.0",
     "underscore": "~1.7.0",
     "complete": "~0.4.4",
-    "require-dir": "~0.1.0"
+    "require-dir": "~0.1.0",
+    "bluebird": "~2.3.11",
+    "mkdirp-then": "~1.0.0",
+    "merge": "~1.2.0",
+    "mustache": "~0.8.2"
   }
 }

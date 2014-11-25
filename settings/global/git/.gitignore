@@ -7,7 +7,6 @@ Thumbs.db
 
 # IDE
 .idea
-*.suo
 
 # Dependencies
 node_modules
