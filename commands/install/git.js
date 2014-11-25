@@ -11,22 +11,15 @@ var git = {
 module.exports = git;
 
 function install(options) {
-    return FileUtils.mkdir(options.targetDir + '/git')
-        .then(function (targetDir) {
-            return fs.readFileAsync('./settings/global/git/.gitconfig', 'utf-8')
-                .then(function (contents) {
-                    return Mustache.render(contents, options);
-                })
-                .then(function(contents){
-                    return fs.writeFileAsync(options.targetDir + '/git/.gitconfig', contents);
-                })
-                .then(function () {
-                    return targetDir;
-                });
+    return fs.readFileAsync('./settings/global/git/gitconfig.mustache', 'utf-8')
+        .then(function (contents) {
+            return Mustache.render(contents, options);
         })
-        .then(function (targetDir) {
+        .then(function (contents) {
+            return fs.writeFileAsync(options.targetDir + '/.gitconfig', contents)
+        })
+        .then(function () {
             fs.createReadStream('settings/global/git/.gitignore')
-                .pipe(fs.createWriteStream(targetDir + '/.gitignore'));
-            return targetDir;
+                .pipe(fs.createWriteStream(options.targetDir + '/.gitignore'));
         });
 }

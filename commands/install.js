@@ -28,8 +28,9 @@ function setup(program) {
 
 var dist = './dist';
 function action(platform) {
-    var configuration = './users/' + this.user + '/config.js';
-    if (!fs.existsSync(configuration)){
+    var self = this;
+    var configuration = './users/' + self.user + '/config.js';
+    if (!fs.existsSync(configuration)) {
         console.log('No configuration file specified. Did you mean to run `devtools init` first?');
         return;
     }
@@ -38,8 +39,14 @@ function action(platform) {
         .then(function (dir) {
             return merge(config, {
                 platform: platform,
-                targetDir: dir
+                targetDir: dir + '/' + self.user
             });
+        })
+        .then(function (options) {
+            return FileUtils.mkdir(options.targetDir).
+                then(function () {
+                    return options;
+                });
         })
         .then(git.install);
 }
