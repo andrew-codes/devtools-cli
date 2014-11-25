@@ -1,10 +1,14 @@
 {
   "name": "devtools",
+  "private": true,
   "version": "0.0.0",
   "description": "",
-  "main": "gulpfile.js",
+  "main": "devtools.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "devtools": "devtools.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +20,9 @@
     "url": "https://github.com/andrew-codes/devtools/issues"
   },
   "dependencies": {
+    "commander": "~2.5.0",
+    "underscore": "~1.7.0",
+    "complete": "~0.4.4",
+    "require-dir": "~0.1.0"
   }
 }
