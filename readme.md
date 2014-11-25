@@ -20,6 +20,6 @@ devtools init --user <your-name>
 
 # 2. Edit the your-name.config.js with your favorite editor
 
-# install devtools for user
+# 3. install devtools for user
 devtools install --user <your-name>
 ```
