@@ -1,10 +1,12 @@
 'use strict';
 
 var complete = require('complete');
-var git = require('./install/git');
 var FileUtils = require('./../lib/utils/FileUtils');
 var merge = require('merge');
 var fs = require('fs');
+var requireDir = require('require-dir');
+var installSteps = requireDir('./install');
+var _ = require('underscore');
 
 var install = {
     getCompletion: getCompletion,
@@ -35,7 +37,7 @@ function action(platform) {
         return;
     }
     var config = require('../' + configuration);
-    FileUtils.rmdir(dist)
+    var installStream = FileUtils.rmdir(dist)
         .then(function (dir) {
             return merge(config, {
                 platform: platform,
@@ -47,6 +49,8 @@ function action(platform) {
                 then(function () {
                     return options;
                 });
-        })
-        .then(git.install);
+        });
+    _.each(Object.keys(installSteps), function (key) {
+        installStream.then(installSteps[key].install);
+    });
 }
