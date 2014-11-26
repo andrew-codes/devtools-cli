@@ -9,7 +9,7 @@ var requireDir = require('require-dir');
 var installSteps = requireDir('./install');
 var _ = require('underscore');
 var path = require('path');
-var exec = Promise.promisifyAll(require('child_process'));
+var Symlink = require('./../lib/utils/Symlink');
 
 var install = {
     getCompletion: getCompletion,
@@ -88,7 +88,7 @@ function finalizeItems(directory, options) {
                     return !item.isDirectory;
                 })
                 .map(function (file) {
-                    finalizeItem(file, options);
+                    return finalizeItem(file, options);
                 }).value();
 
             promises.concat(_.chain(items)
@@ -104,24 +104,5 @@ function finalizeItems(directory, options) {
 }
 
 function finalizeItem(file, options) {
-    var dest = options.dest(file.path);
-    return fs.unlinkAsync(dest)
-        .error(function (e) {
-        })
-        .then(function () {
-            var command = '';
-            var src = path.resolve(file.path);
-            switch (options.platform) {
-                case 'darwin':
-                    command = 'ln -s ' + src + ' ' + dest;
-                    break;
-                case 'win32':
-                    command = 'mklink ' + dest + ' ' + src;
-                    break;
-                default:
-                    throw options.platform + ' is not supported';
-            }
-            return exec.execAsync(command);
-        });
-
+    return Symlink.mklink(options.platform, file.path, options.dest(file.path));
 }

@@ -8,7 +8,8 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "bin": {
-        "devtools": "devtools.js"
+        "devtools": "devtools.js",
+        "devtools-auto-complete": "auto-complete.js"
     },
     "repository": {
         "type": "git",
