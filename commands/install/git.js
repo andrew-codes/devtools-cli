@@ -11,7 +11,7 @@ var git = {
 module.exports = git;
 
 function install(options) {
-    return fs.readFileAsync('./settings/global/git/gitconfig.mustache', 'utf-8')
+    return fs.readFileAsync('./settings/git/gitconfig.mustache', 'utf-8')
         .then(function (contents) {
             return Mustache.render(contents, options);
         })
@@ -19,7 +19,7 @@ function install(options) {
             return fs.writeFileAsync(options.targetDir + '/.gitconfig', contents)
         })
         .then(function () {
-            return fs.readFileAsync('settings/global/git/.gitignore', 'utf-8')
+            return fs.readFileAsync('settings/git/.gitignore', 'utf-8')
                 .then(function (data) {
                     return fs.writeFileAsync(options.targetDir + '/.gitignore', data);
                 })
