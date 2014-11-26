@@ -110,8 +110,16 @@ function finalizeItem(file, options) {
         })
         .then(function () {
             var command = '';
-            if (options.platform === 'darwin') {
-                command = 'ln -s ' + path.resolve(file.path) + ' ' + options.dest(file.path);
+            var src = path.resolve(file.path);
+            switch (options.platform) {
+                case 'darwin':
+                    command = 'ln -s ' + src + ' ' + dest;
+                    break;
+                case 'windows':
+                    command = 'mklink ' + src + ' ' + dest;
+                    break;
+                default:
+                    throw options.platform + ' is not supported';
             }
             return exec.execAsync(command);
         });
