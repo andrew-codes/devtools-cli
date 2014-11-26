@@ -19,7 +19,12 @@ function install(options) {
             return fs.writeFileAsync(options.targetDir + '/.gitconfig', contents)
         })
         .then(function () {
-            fs.createReadStream('settings/global/git/.gitignore')
-                .pipe(fs.createWriteStream(options.targetDir + '/.gitignore'));
+            return fs.readFileAsync('settings/global/git/.gitignore', 'utf-8')
+                .then(function (data) {
+                    return fs.writeFileAsync(options.targetDir + '/.gitignore', data);
+                })
+                .then(function () {
+                    return options;
+                });
         });
 }
