@@ -19,7 +19,7 @@ module.exports = install;
 
 function getCompletion() {
     return function (words, prev, cur) {
-        complete.output(cur, ['windows', 'osx']);
+        complete.output(cur, ['--user']);
     };
 }
 
