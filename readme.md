@@ -14,11 +14,14 @@ This is a CLI written in node to automate developer tasks. This includes:
 ```bash
 npm install devtools-cli -g
 
-# 1. Initialize a user config file
+# 1. Auto-completion in CLI
+devtools-auto-complete
+
+# 2. Initialize a user config file
 devtools init --user <your-computer-user-name>
 
-# 2. Edit the users/<your-computer-user-name>/config.js with your favorite editor
+# 3. Edit the users/<your-computer-user-name>/config.js with your favorite editor
 
-# 3. install devtools for user
+# 4. install devtools for user
 devtools install --user <your-computer-user-name>
 ```
