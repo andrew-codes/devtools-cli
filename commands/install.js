@@ -115,8 +115,8 @@ function finalizeItem(file, options) {
                 case 'darwin':
                     command = 'ln -s ' + src + ' ' + dest;
                     break;
-                case 'windows':
-                    command = 'mklink ' + src + ' ' + dest;
+                case 'win32':
+                    command = 'mklink ' + dest + ' ' + src;
                     break;
                 default:
                     throw options.platform + ' is not supported';
