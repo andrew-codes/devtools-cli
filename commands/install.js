@@ -2,11 +2,14 @@
 
 var complete = require('complete');
 var FileUtils = require('./../lib/utils/FileUtils');
+var Promise = require('bluebird');
 var merge = require('merge');
-var fs = require('fs');
+var fs = Promise.promisifyAll(require('fs'));
 var requireDir = require('require-dir');
 var installSteps = requireDir('./install');
 var _ = require('underscore');
+var path = require('path');
+var exec = Promise.promisifyAll(require('child_process'));
 
 var install = {
     getCompletion: getCompletion,
@@ -29,28 +32,88 @@ function setup(program) {
 }
 
 var dist = './dist';
-function action(platform) {
+function action() {
     var self = this;
-    var configuration = './users/' + self.user + '/config.js';
-    if (!fs.existsSync(configuration)) {
-        console.log('No configuration file specified. Did you mean to run `devtools init` first?');
-        return;
-    }
-    var config = require('../' + configuration);
+    var options = getOptions(self.user);
     var installStream = FileUtils.rmdir(dist)
-        .then(function (dir) {
-            return merge(config, {
-                platform: platform,
-                targetDir: dir + '/' + self.user
-            });
-        })
-        .then(function (options) {
-            return FileUtils.mkdir(options.targetDir).
-                then(function () {
-                    return options;
-                });
+        .then(function () {
+            return FileUtils.mkdir(options.targetDir)
+        }).
+        then(function () {
+            return options;
         });
     _.each(Object.keys(installSteps), function (key) {
-        installStream.then(installSteps[key].install);
+        installStream = installStream.then(installSteps[key].install);
     });
+    installStream.then(finalize)
+        .catch(function (e) {
+            console.log(e);
+        });
+}
+
+function finalize(options) {
+    return finalizeItems(options.targetDir, options);
+}
+
+function getOptions(user) {
+    var configurationPath = path.join('./users/', user, '/config.js');
+    if (!fs.existsSync(configurationPath)) {
+        throw 'No configuration file specified. Did you mean to run `devtools init` first?';
+    }
+    var config = require('../' + configurationPath);
+    var targetDir = path.join('./dist', user);
+    return merge(config, {
+        platform: process.platform,
+        targetDir: targetDir,
+        user: user,
+        dest: function (filePath) {
+            return path.resolve('/Users', user, path.relative(targetDir, filePath));
+        }
+    });
+}
+
+function finalizeItems(directory, options) {
+    return fs.readdirAsync(directory)
+        .then(function (dirItems) {
+            var items = _.map(dirItems, function (item) {
+                var itemPath = path.join(directory, item);
+                return {
+                    path: itemPath,
+                    Name: item,
+                    isDirectory: fs.lstatSync(itemPath).isDirectory()
+                };
+            });
+            var promises = _.chain(items)
+                .filter(function (item) {
+                    return !item.isDirectory;
+                })
+                .map(function (file) {
+                    finalizeItem(file, options);
+                }).value();
+
+            promises.concat(_.chain(items)
+                .filter(function (item) {
+                    return item.isDirectory;
+                })
+                .map(function (dir) {
+                    return finalizeItems(dir.path, options)
+                }).value());
+
+            return _.flatten(promises);
+        });
+}
+
+function finalizeItem(file, options) {
+    var dest = options.dest(file.path);
+    return fs.unlinkAsync(dest)
+        .error(function (e) {
+        })
+        .then(function () {
+            var command = '';
+            if (options.platform === 'darwin') {
+                command = 'ln -s ' + path.resolve(file.path) + ' ' + options.dest(file.path);
+            }
+            return exec.execAsync(command);
+        });
+
 }
