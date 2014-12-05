@@ -3,13 +3,13 @@
 var complete = require('complete');
 var FileUtils = require('./../lib/utils/FileUtils');
 var Promise = require('bluebird');
-var merge = require('merge');
 var fs = Promise.promisifyAll(require('fs'));
 var requireDir = require('require-dir');
 var installSteps = requireDir('./install');
 var _ = require('underscore');
 var path = require('path');
 var Symlink = require('./../lib/utils/Symlink');
+var Config = require('./../lib/utils/Config');
 
 var install = {
     getCompletion: getCompletion,
@@ -33,11 +33,10 @@ function setup(program) {
 
 var dist = './dist';
 function action() {
-    var self = this;
-    var options = getOptions(self.user);
+    var options = getOptions(this.user);
     var installStream = FileUtils.rmdir(dist)
         .then(function () {
-            return FileUtils.mkdir(options.targetDir)
+            return FileUtils.mkdir(options.targetDir);
         }).
         then(function () {
             return options;
@@ -56,20 +55,7 @@ function finalize(options) {
 }
 
 function getOptions(user) {
-    var configurationPath = path.join('./users/', user, '/config.js');
-    if (!fs.existsSync(configurationPath)) {
-        throw 'No configuration file specified. Did you mean to run `devtools init` first?';
-    }
-    var config = require('../' + configurationPath);
-    var targetDir = path.join('./dist', user);
-    return merge(config, {
-        platform: process.platform,
-        targetDir: targetDir,
-        user: user,
-        dest: function (filePath) {
-            return path.resolve('/Users', user, path.relative(targetDir, filePath));
-        }
-    });
+    return Config.applyForUser(user);
 }
 
 function finalizeItems(directory, options) {
@@ -96,7 +82,7 @@ function finalizeItems(directory, options) {
                     return item.isDirectory;
                 })
                 .map(function (dir) {
-                    return finalizeItems(dir.path, options)
+                    return finalizeItems(dir.path, options);
                 }).value());
 
             return _.flatten(promises);

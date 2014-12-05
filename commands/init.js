@@ -22,7 +22,7 @@ function setup(program) {
         .command('init')
         .description('Initializes installation configuration')
         .action(action)
-        .option('-u, --user [name]', 'Your name')
+        .option('-u, --user [name]', 'Your name');
 }
 
 function action() {

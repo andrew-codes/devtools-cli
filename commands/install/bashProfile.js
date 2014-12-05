@@ -1,7 +1,6 @@
 'use strict';
 
 var Template = require('./../../lib/utils/Template');
-var _ = require('underscore');
 
 var bashProfile = {
     install: install
