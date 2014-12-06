@@ -34,9 +34,6 @@ function installGit(options) {
 function configureGit(options) {
 	return Template.combineInTemplate('settings/git/.gitconfig.mustache', '', options)
 		.then(function () {
-			return fs.readFileAsync('settings/git/.gitignore', 'utf-8')
-				.then(function (data) {
-					return fs.writeFileAsync(options.targetDir + '/.gitignore', data);
-				})
+			return Template.copy('settings/git/.gitignore', options.targetDir + '/.gitignore');
 		});
 }
