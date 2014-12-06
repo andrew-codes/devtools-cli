@@ -50,16 +50,13 @@ function action() {
 					return _.contains(options.includeApplications, key);
 				})
 				.map(function (key) {
-					console.log('Starting installation: ' + key)
+					Log.log('Starting installation', key);
 					return installSteps[key].install(options)
 						.tap(function () {
-							console.log('Finished installation: ' + key);
+							Log.log('Finished installation', key);
 						});
 				}).value();
-			Promise.all(installations)
-				.then(_.constant(options))
-				.then(finalize)
-				.catch(Log.error);
+			Promise.all(installations);
 		});
 }
 
@@ -111,13 +108,19 @@ function finalizeItem(file, options) {
 function initializeEnvironment(options) {
 	if (options.isOsx()) {
 		return Shell.run('ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"')
-			.catch(Log.error)
+			.catch(function (e) {
+				Log.error('Brew, e');
+			})
 			.then(function () {
 				return Shell.run('brew install cask')
-					.catch(Log.error);
+					.catch(function (e) {
+						Log.error('Brew Cask', e);
+					});
 			});
 	} else if (options.isWindows()) {
 		return Shell.run('@powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString(\'https://chocolatey.org/install.ps1\'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\\chocolatey\\bin\\')
-			.catch(Log.error);
+			.catch(function (e) {
+				Log.error('Chocolately', e);
+			});
 	}
 }

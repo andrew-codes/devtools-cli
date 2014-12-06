@@ -6,22 +6,33 @@ var Template = require('./../../lib/utils/Template');
 var Shell = require('./../../lib/utils/Shell');
 var Log = require('./../../lib/utils/Log');
 var _ = require('underscore');
+var Symlink = require('./../../lib/utils/Symlink');
+var path = require('path');
 
 var git = {
 	install: install
 };
 module.exports = git;
 
+	var component = 'git';
 function install(options) {
-	var returnOptions = _.constant(options);
 	return installGit(options)
-		.then(returnOptions)
+		.catch(function (e) {
+			Log.error('Error installing', component, e);
+		})
+		.then(_.constant(options))
 		.then(configureGit)
-		.catch(Log.error);
+		.catch(function (e) {
+			Log.error("Error configuring", component, e);
+			throw e;
+		})
+		.then(finalizeGit)
+		.catch(function (e) {
+			Log.error("Error finalizing", component, e);
+		});
 }
 
 function installGit(options) {
-	var installation;
 	if (options.isOsx()) {
 		return Shell.run('brew install git');
 	} else if (options.isWindows()) {
@@ -34,6 +45,14 @@ function installGit(options) {
 function configureGit(options) {
 	return Template.combineInTemplate('settings/git/.gitconfig.mustache', '', options)
 		.then(function () {
-			return Template.copy('settings/git/.gitignore', options.targetDir + '/.gitignore');
+			return Template.copy('settings/git/.gitignore', path.join(options.targetDir, '.gitignore'));
+		})
+		.then(_.constant(options));
+}
+
+function finalizeGit(options) {
+	return Symlink.mklink(options.platform, path.join(options.targetDir, '.gitconfig'), path.join(options.userDirectory, '.gitconfig'))
+		.then(function () {
+			return Symlink.mklink(options.platform, path.join(options.targetDir, '.gitignore'), path.join(options.userDirectory, '.gitignore'));
 		});
 }

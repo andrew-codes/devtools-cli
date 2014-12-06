@@ -4,8 +4,6 @@
 			'solarized-dark-ui'
 			'solarized-dark-syntax'
 		]
-	'exception-reporting':
-		'userId': 'd9e4e8d1-6af1-9d3b-0e2c-be8388968ff4'
 	'welcome':
 		'showOnStartup': false
 	'linter':
