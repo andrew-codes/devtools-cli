@@ -1,10 +1,9 @@
 #!/usr/bin/env node
+
 'use strict';
 
-var Promise = require('bluebird');
-var exec = Promise.promisifyAll(require('child_process'));
+var Shell = require('./lib/utils/Shell');
+var Log = require('./lib/utils/Log');
 
-exec.execAsync('node devtools.js --install >> ~/.bash_profile')
-    .catch(function (e) {
-        console.log(e);
-    });
+Shell.run('node devtools.js --install >> /Users/andrewsmith/.bash_profile')
+.catch(Log.error);
