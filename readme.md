@@ -15,7 +15,7 @@ This is a CLI written in node to automate developer tasks. This includes:
 npm install devtools-cli -g
 
 # 1. Auto-completion in CLI
-devtools-auto-complete
+devtools-autocomplete
 
 # 2. Initialize a user config file
 devtools init --user <your-computer-user-name>
