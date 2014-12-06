@@ -57,6 +57,7 @@ function install(options) {
 						})
 				});
 		})
+		.catch(Log.error)
 		.then(_.constant(options));
 }
 
