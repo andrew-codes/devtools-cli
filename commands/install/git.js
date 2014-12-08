@@ -8,6 +8,7 @@ var Log = require('./../../lib/utils/Log');
 var _ = require('underscore');
 var Symlink = require('./../../lib/utils/Symlink');
 var path = require('path');
+var config = require('./../../lib/utils/Config').get();
 
 var git = {
 	install: install
@@ -15,12 +16,11 @@ var git = {
 module.exports = git;
 
 	var component = 'git';
-function install(options) {
-	return installGit(options)
+function install() {
+	return installGit()
 		.catch(function (e) {
 			Log.error('Error installing', component, e);
 		})
-		.then(_.constant(options))
 		.then(configureGit)
 		.catch(function (e) {
 			Log.error("Error configuring", component, e);
@@ -32,27 +32,26 @@ function install(options) {
 		});
 }
 
-function installGit(options) {
-	if (options.isOsx()) {
+function installGit() {
+	if (config.isOsx()) {
 		return Shell.run('brew install git');
-	} else if (options.isWindows()) {
+	} else if (config.isWindows()) {
 		return Shell.run('choco install git');
 	} else {
-		throw 'Platform not supported for Git: ' + options.platform;
+		throw config.unsupportedPlatformError;
 	}
 }
 
-function configureGit(options) {
-	return Template.combineInTemplate('settings/git/.gitconfig.mustache', '', options)
+function configureGit() {
+	return Template.combineInTemplate('settings/git/.gitconfig.mustache', '')
 		.then(function () {
-			return Template.copy('settings/git/.gitignore', path.join(options.targetDir, '.gitignore'));
-		})
-		.then(_.constant(options));
+			return Template.copy('settings/git/.gitignore', path.join(config.targetDir, '.gitignore'));
+		});
 }
 
-function finalizeGit(options) {
-	return Symlink.mklink(options.platform, path.join(options.targetDir, '.gitconfig'), path.join(options.userDirectory, '.gitconfig'))
+function finalizeGit() {
+	return Symlink.mklink(path.join(config.targetDir, '.gitconfig'), path.join(config.userDirectory, '.gitconfig'))
 		.then(function () {
-			return Symlink.mklink(options.platform, path.join(options.targetDir, '.gitignore'), path.join(options.userDirectory, '.gitignore'));
+			return Symlink.mklink(path.join(config.targetDir, '.gitignore'), path.join(config.userDirectory, '.gitignore'));
 		});
 }

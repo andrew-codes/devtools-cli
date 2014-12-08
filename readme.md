@@ -18,10 +18,10 @@ npm install devtools-cli -g
 devtools-autocomplete
 
 # 2. Initialize a user config file
-devtools init --user <your-computer-user-name>
+devtools init
 
 # 3. Edit the users/<your-computer-user-name>/config.js with your favorite editor
 
 # 4. install devtools for user
-devtools install --user <your-computer-user-name>
+devtools install
 ```

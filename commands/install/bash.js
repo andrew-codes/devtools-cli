@@ -4,15 +4,17 @@ var Template = require('./../../lib/utils/Template');
 var Log = require('./../../lib/utils/Log');
 var Symlink = require('./../../lib/utils/Symlink');
 var path = require('path');
+var config = require('./../../lib/utils/Config').get();
 
 var bashProfile = {
 	install: install
 };
 module.exports = bashProfile;
 
-	var component = 'bash';
-function install(options) {
-	return createAlias(options)
+var component = 'bash';
+
+function install() {
+	return createAlias()
 		.catch(function (e) {
 			Log.error('Error creating alias', component, e);
 			throw e;
@@ -33,24 +35,24 @@ function install(options) {
 		});
 }
 
-function createAlias(options) {
-	return Template.combineInTemplate('./settings/bash/.alias.mustache', '', options);
+function createAlias() {
+	return Template.combineInTemplate('./settings/bash/.alias.mustache', '');
 }
 
-function createRc(options) {
-	return Template.combineInTemplate('./settings/bash/.bashrc.mustache', '', options);
+function createRc() {
+	return Template.combineInTemplate('./settings/bash/.bashrc.mustache', '');
 }
 
-function createProfile(options) {
-	return Template.combineInTemplate('./settings/bash/.bash_profile.mustache', '', options);
+function createProfile() {
+	return Template.combineInTemplate('./settings/bash/.bash_profile.mustache', '');
 }
 
-function finalizeBash(options) {
-	return Symlink.mklink(options.platform, options.targetDir + '/.alias', path.join(options.userDirectory, '.alias'))
+function finalizeBash() {
+	return Symlink.mklink(path.join(config.targetDir, '.alias'), path.join(config.userDirectory, '.alias'))
 		.then(function () {
-			return Symlink.mklink(options.platform, options.targetDir + '/.bash_profile', path.join(options.userDirectory, '.bash_profile'));
+			return Symlink.mklink(path.join(config.targetDir, '.bash_profile'), path.join(config.userDirectory, '.bash_profile'));
 		})
 		.then(function () {
-			return Symlink.mklink(options.platform, options.targetDir + '/.bashrc', path.join(options.userDirectory, '.bashrc'));
+			return Symlink.mklink(path.join(config.targetDir, '.bashrc'), path.join(config.userDirectory, '.bashrc'));
 		});
 }

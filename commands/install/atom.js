@@ -8,6 +8,7 @@ var Log = require('./../../lib/utils/Log');
 var Template = require('./../../lib/utils/Template');
 var Symlink = require('./../../lib/utils/Symlink');
 var path = require('path');
+var config = require('./../../lib/utils/Config').get();
 
 var packages = [
 	'solarized-dark-ui',
@@ -46,14 +47,13 @@ var atom = {
 };
 module.exports = atom;
 
-var component = 'Atom';
+var component = 'atom';
 
-function install(options) {
-	return installAtom(options)
+function install() {
+	return installAtom()
 		.catch(function (e) {
 			Log.error('Error installing', component, e);
 		})
-		.then(_.constant(options))
 		.then(installPackages)
 		.catch(function (e) {
 			Log.error('Error installing packages', component, e);
@@ -70,17 +70,16 @@ function install(options) {
 		});
 }
 
-function installAtom(options) {
-	var installation;
-	if (options.isOsx()) {
+function installAtom() {
+	if (config.isOsx()) {
 		return Shell.run('brew cask install atom');
-	} else if (options.isWindows()) {
+	} else if (config.isWindows()) {
 		return Shell.run('choco install Atom');
 	}
-	throw 'Platform not supported for Atom: ' + options.platform;
+	throw config.unsupportedPlatformError;
 }
 
-function installPackages(options) {
+function installPackages() {
 	var packageInstalls = _.map(packages, function (pkg) {
 		return Shell.run('apm install ' + pkg);
 	});
@@ -93,15 +92,13 @@ function installPackages(options) {
 				.each(function (r) {
 					Log.error('Error installing package: ' + r.reason().command, component);
 				})
-		})
-		.then(_.constant(options));
+		});
 }
 
-function configureAtom(options) {
-	return Template.copy('settings/atom/config.cson', options.targetDir + '/.atom/config.cson')
-		.then(_.constant(options));
+function configureAtom() {
+	return Template.copy('settings/atom/config.cson', config.targetDir + '/.atom/config.cson');
 }
 
-function finalizeAtom(options) {
-	return Symlink.mklink(options.platform, options.targetDir + '/.atom/config.cson', path.join(options.userDirectory, '.atom/config.cson'));
+function finalizeAtom() {
+	return Symlink.mklink(path.join(config.targetDir, '.atom/config.cson'), path.join(config.userDirectory, '.atom/config.cson'));
 }
