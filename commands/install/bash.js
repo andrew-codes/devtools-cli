@@ -4,7 +4,7 @@ var Template = require('./../../lib/utils/Template');
 var Log = require('./../../lib/utils/Log');
 var Symlink = require('./../../lib/utils/Symlink');
 var path = require('path');
-var config = require('./../../lib/utils/Config').get();
+var Config = require('./../../lib/utils/Config');
 
 var bashProfile = {
 	install: install
@@ -12,9 +12,11 @@ var bashProfile = {
 module.exports = bashProfile;
 
 var component = 'bash';
+var config;
 
 function install() {
-	return createAlias()
+		config = Config.get();
+		return createAlias()
 		.catch(function (e) {
 			Log.error('Error creating alias', component, e);
 			throw e;
@@ -36,15 +38,15 @@ function install() {
 }
 
 function createAlias() {
-	return Template.combineInTemplate('./settings/bash/.alias.mustache', '');
+	return Template.combineInTemplate('settings/bash/.alias.mustache', '');
 }
 
 function createRc() {
-	return Template.combineInTemplate('./settings/bash/.bashrc.mustache', '');
+	return Template.combineInTemplate('settings/bash/.bashrc.mustache', '');
 }
 
 function createProfile() {
-	return Template.combineInTemplate('./settings/bash/.bash_profile.mustache', '');
+	return Template.combineInTemplate('settings/bash/.bash_profile.mustache', '');
 }
 
 function finalizeBash() {

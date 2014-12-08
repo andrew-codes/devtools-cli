@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var FileUtils = require('./../lib/utils/FileUtils');
+var path = require('path');
 
 var configuration = {
 		setup: setup
@@ -18,10 +19,9 @@ function setup(program) {
 }
 
 function action() {
-		FileUtils.mkdir('./users/' + process.env.user)
+	var baseDir = __dirname;
+		FileUtils.mkdir(path.join(baseDir, '../users', process.env.USERNAME))
 				.then(function (dir) {
-						fs.createReadStream('./settings/config.js')
-								.pipe(fs.createWriteStream(dir + '/config.js'));
-
-				});
+						fs.createReadStream(path.join(baseDir, '../settings/config.js'))
+								.pipe(fs.createWriteStream(path.join(dir, 'config.js')))});
 }

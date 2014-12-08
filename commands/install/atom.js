@@ -8,7 +8,7 @@ var Log = require('./../../lib/utils/Log');
 var Template = require('./../../lib/utils/Template');
 var Symlink = require('./../../lib/utils/Symlink');
 var path = require('path');
-var config = require('./../../lib/utils/Config').get();
+var Config = require('./../../lib/utils/Config');
 
 var packages = [
 	'solarized-dark-ui',
@@ -48,8 +48,9 @@ var atom = {
 module.exports = atom;
 
 var component = 'atom';
-
+var config;
 function install() {
+	config = Config.get();
 	return installAtom()
 		.catch(function (e) {
 			Log.error('Error installing', component, e);

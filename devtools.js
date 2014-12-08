@@ -9,6 +9,7 @@ var requireDir = require('require-dir');
 var program = require('commander');
 var commands = requireDir('./commands');
 var commandCompletion = {};
+
 program
 	.version(pkg.version);
 _.each(Object.keys(commands), function (key) {

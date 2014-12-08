@@ -9,7 +9,7 @@ var installSteps = requireDir('./install');
 var _ = require('underscore');
 var path = require('path');
 var Symlink = require('./../lib/utils/Symlink');
-var config = require('./../lib/utils/Config').get();
+var Config = require('./../lib/utils/Config');
 var Log = require('./../lib/utils/Log');
 var Shell = require('./../lib/utils/Shell');
 
@@ -25,7 +25,9 @@ function setup(program) {
 		.action(action);
 }
 
+var config;
 function action() {
+	config = Config.get();
 	FileUtils.rmdir(config.targetDir)
 		.then(function () {
 			return FileUtils.mkdir(config.targetDir);

@@ -8,15 +8,17 @@ var Log = require('./../../lib/utils/Log');
 var _ = require('underscore');
 var Symlink = require('./../../lib/utils/Symlink');
 var path = require('path');
-var config = require('./../../lib/utils/Config').get();
+var Config = require('./../../lib/utils/Config');
 
 var git = {
 	install: install
 };
 module.exports = git;
 
-	var component = 'git';
+var component = 'git';
+var config;
 function install() {
+	config = Config.get();
 	return installGit()
 		.catch(function (e) {
 			Log.error('Error installing', component, e);
