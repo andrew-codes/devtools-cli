@@ -1,12 +1,14 @@
 {
-    "bold_folder_labels": true,
-    "ensure_newline_at_eof_on_save": true,
-    "font_size": 10,
-    "highlight_line": true,
-    "highlight_modified_tabs": true,
-    "ignored_packages": [
-        "Vintage"
-    ],
-    "tab_size": 2,
-    "trim_trailing_white_space_on_save": true
+	"bold_folder_labels": true,
+	"ensure_newline_at_eof_on_save": true,
+	"font_size": 10,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages": [
+		"Vintage"
+	],
+	"tab_size": 2,
+	"translateTabsToSpaces": true,
+	"detectIndentation": false,
+	"trim_trailing_white_space_on_save": true
 }
